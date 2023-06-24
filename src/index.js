@@ -10,6 +10,7 @@ import { flightRouter } from "./routes/flights.js"
 import { postFlightReportRouter } from "./routes/postFlightReports.js"
 import { historyRouter } from "./routes/histories.js"
 import { checklistRouter } from "./routes/checklists.js"
+import { contactRouter } from "./routes/contacts.js"
 
 const app = express()
 app.use(express.json())
@@ -22,6 +23,7 @@ app.use("/flights", flightRouter)
 app.use("/pfr", postFlightReportRouter)
 app.use("/histories", historyRouter)
 app.use("/checklists", checklistRouter)
+app.use("/contacts", contactRouter)
 
 dotenv.config()
 const DB_PASS = process.env.DB_PASS
@@ -31,4 +33,4 @@ mongoose.connect(
     `mongodb+srv://uavits:${DB_PASS}@uavitsskripsi.4ooztii.mongodb.net/${MY_DB}?retryWrites=true&w=majority`
 )
 
-app.listen(3000, () => console.log("SERVER_STARTED"))
+app.listen(8080, () => console.log("SERVER_STARTED"))
