@@ -12,18 +12,18 @@ const registerController = async (req, res) => {
         const { email, password, confirmPassword, name, address, phoneNumber, role } = req.body
         const user = await UserModel.findOne({ email })
         if (user) {
-            response.code = 400
+            response.code = 204
             response.message = "User already registered. Try another!"
             response.data = {}
-            return res.status(400).json(response)
+            return res.status(204).json(response)
         }
 
         const hashPassword = await bcrypt.hash(password, 10)
         if (password != confirmPassword) {
-            response.code = 400
+            response.code = 204
             response.message = "Password and confirm password not match!"
             response.data = {}
-            return res.status(400).json(response)
+            return res.status(204).json(response)
         }
 
         const newUser = new UserModel({
