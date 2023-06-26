@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Project Transponder</name>
+	<gx:CascadingStyle kml:id="__managed_style_0618A303F42A29752D7A">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6.5775</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_146377B6492A29752D79">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4.385</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_04F56E33F72A29752D79">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_146377B6492A29752D79</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_0618A303F42A29752D7A</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark id="00AAB4A7A924ADC46DDE">
+		<name>ITS 1</name>
+		<LookAt>
+			<longitude>112.7925049258056</longitude>
+			<latitude>-7.279280760279498</latitude>
+			<altitude>3.799531720303255</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>1184.020061041228</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_04F56E33F72A29752D79</styleUrl>
+		<Point>
+			<coordinates>112.7899525161473,-7.279228460428511,1.401475159397376</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="03773283CF24ADC4C359">
+		<name>ITS 2</name>
+		<LookAt>
+			<longitude>112.7950561525594</longitude>
+			<latitude>-7.278789479061499</latitude>
+			<altitude>3.237596598420409</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>1719.238854244177</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_04F56E33F72A29752D79</styleUrl>
+		<Point>
+			<coordinates>112.7904647181969,-7.276504368352951,2.111420148384313</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="004FC4D67E24ADC52670">
+		<name>ITS 3</name>
+		<LookAt>
+			<longitude>112.7950561525594</longitude>
+			<latitude>-7.278789479061499</latitude>
+			<altitude>3.237596598420409</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>1719.238854244177</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_04F56E33F72A29752D79</styleUrl>
+		<Point>
+			<coordinates>112.7995899067946,-7.275778640200318,0.4065848426515393</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="022A1BEE0624ADC56A26">
+		<name>ITS 4</name>
+		<LookAt>
+			<longitude>112.7950561525594</longitude>
+			<latitude>-7.278789479061499</latitude>
+			<altitude>3.237596598420409</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>1719.238854244177</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_04F56E33F72A29752D79</styleUrl>
+		<Point>
+			<coordinates>112.8010656157201,-7.28165931477033,1.492527654112708</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="061779055424ADC5D638">
+		<name>ITS 5</name>
+		<LookAt>
+			<longitude>112.796374809904</longitude>
+			<latitude>-7.283868555831933</latitude>
+			<altitude>3.203910315969865</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>1719.272600828845</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_04F56E33F72A29752D79</styleUrl>
+		<Point>
+			<coordinates>112.799210856496,-7.285373108429258,1.357812692453042</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="008EA0802324ADC6457B">
+		<name>ITS 6</name>
+		<LookAt>
+			<longitude>112.7936246605466</longitude>
+			<latitude>-7.286180197297773</latitude>
+			<altitude>1.970608312839877</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>1720.505834535579</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_04F56E33F72A29752D79</styleUrl>
+		<Point>
+			<coordinates>112.7936692601743,-7.286420354184139,1.829085878819156</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="03FC13ECB224ADC67512">
+		<name>ITS 7</name>
+		<LookAt>
+			<longitude>112.7936246605466</longitude>
+			<latitude>-7.286180197213241</latitude>
+			<altitude>1.970608312839877</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>1720.50583453558</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_04F56E33F72A29752D79</styleUrl>
+		<Point>
+			<coordinates>112.791744808565,-7.290554230248989,1.594244393074927</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="016CC1B9A024ADC69C12">
+		<name>ITS 8</name>
+		<LookAt>
+			<longitude>112.7936246605466</longitude>
+			<latitude>-7.28618019712871</latitude>
+			<altitude>1.970608312839877</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>1720.505834535579</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_04F56E33F72A29752D79</styleUrl>
+		<Point>
+			<coordinates>112.7894898428033,-7.290212056039494,1.960267291957022</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0C7B8EA26E24ADC816FA">
+		<name>Area Kerja ITS</name>
+		<LookAt>
+			<longitude>112.8012220275184</longitude>
+			<latitude>-7.281828461218867</latitude>
+			<altitude>3.236288913002039</altitude>
+			<heading>8.537736462515939e-07</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>4081.686128890724</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_04F56E33F72A29752D79</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						112.7917436830667,-7.290551664242073,1.079677113023345 112.7936683646169,-7.286418878482271,1.263384000536929 112.799209992078,-7.285371343399744,0.9808439263383573 112.8010633893356,-7.281655203217259,0.7255432394938022 112.7995738420042,-7.275760479199824,0.406513996118789 112.790462933687,-7.276500572861433,1.569653993854818 112.789951163324,-7.279224273142734,1.498211648196031 112.7894896791989,-7.290211515372564,2.741294533182015 112.7917436830667,-7.290551664242073,1.079677113023345 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>
