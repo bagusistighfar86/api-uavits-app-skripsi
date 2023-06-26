@@ -1,5 +1,6 @@
 import * as turf from "@turf/turf"
 import { KMLModel } from "../../models/KML.js"
+import { FlightModel } from "../../models/Flights.js"
 
 const checkGeofencingController = async (req, res) => {
   try {
@@ -8,12 +9,7 @@ const checkGeofencingController = async (req, res) => {
     let isInside = false
     let distToArea = 0
 
-    // const { latitude, longitude, altitude, flightId } = req.body
-
-    const longitude = req.longitude
-    const latitude = req.latitude
-    const altitude = req.altitude
-    const flightId = req.flightId
+    const { latitude, longitude, altitude, groundSpeed, flightId } = req.body
 
     let code = 200
     let name = ""
@@ -82,6 +78,11 @@ const checkGeofencingController = async (req, res) => {
       response.data.message = "The flight exceeds the maximum altitude limit"
       response.data.area_name = name
     }
+
+    await FlightModel.findByIdAndUpdate(
+      flightId,
+      { $set: { $push: { liveFlight: { longitude, latitude, altitude, groundSpeed } } } },
+    )
 
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate")
     return res.status(200).json(response)

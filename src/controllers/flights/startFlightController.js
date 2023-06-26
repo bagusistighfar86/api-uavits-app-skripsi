@@ -2,44 +2,49 @@ import { DroneModel } from "../../models/Drones.js"
 import { FlightModel } from "../../models/Flights.js"
 import { PilotModel } from "../../models/Pilots.js"
 
-const startFlightController = async (req, res, next) => {
+const startFlightController = async (req, res) => {
     try {
+        let response = {
+            code: "",
+            message: "",
+            data: {},
+        }
         const { id } = req.params
-        const { longitude, latitude, altitude, groundSpeed } = req.body
+        
         const flight = await FlightModel.findByIdAndUpdate(
             id,
-            { $set: { flightStatus: true }, $push: { liveFlight: { longitude, latitude, altitude, groundSpeed } } },
+            { $set: { flightStatus: true } },
             { new: true }
         )
 
         if (!flight) {
-            return res.status(404).json({ error: 'Flight not found' })
+            response.code = 404
+            response.message = "Flight not found"
+            response.data = {}
+            return res.status(404).json(response)
         }
 
         await DroneModel.findByIdAndUpdate(
             flight.detailDrone.id,
-            { flightStatus: true },
-            { new: true }
+            { flightStatus: true }
         )
 
         for (const pilot of flight.pilot) {
-            const pl = await PilotModel.findByIdAndUpdate(
+            await PilotModel.findByIdAndUpdate(
                 pilot.id,
-                { flightStatus: true },
-                { new: true }
+                { flightStatus: true }
             )
         }
 
-        req.longitude = longitude
-        req.latitude = latitude
-        req.altitude = altitude
-        req.flightId = id
-
-        next()
-
-        // res.json({ message: 'Flight status and location updated successfully' })
-    } catch (error) {
-        res.status(500).json({ error: 'Error updating flight status and location', details: error.message })
+        response.code = 200
+        response.message = "Flight started"
+        response.data = {}
+        return res.status(200).json(response)
+    } catch (e) {
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 

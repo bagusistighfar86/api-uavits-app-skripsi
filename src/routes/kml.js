@@ -4,6 +4,7 @@ import express from "express"
 // import { verifyTokenAdmin } from "../middleware/verifyTokenAdmin.js"
 import addKMLController from "../controllers/kml/addKMLController.js"
 import checkGeofencingController from "../controllers/kml/checkGeofencingController.js"
+import { verifyToken } from "../middleware/verifyToken.js"
 
 const router = express.Router()
 const storage = multer.diskStorage({
@@ -33,7 +34,7 @@ const cpUpload = upload.fields([
 ])
 
 router.post("/", cpUpload, addKMLController)
-router.post("/check-geofencing", checkGeofencingController,)
+router.post("/check-geofencing", verifyToken, checkGeofencingController,)
 // router.post("/", verifyTokenAdmin, addContactController)
 
 

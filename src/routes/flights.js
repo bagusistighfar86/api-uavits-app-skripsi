@@ -14,7 +14,6 @@ import { verifyTokenAdmin } from "../middleware/verifyTokenAdmin.js"
 import getFlightPFRController from "../controllers/flights/getFlightPFR.js"
 import startFlightController from "../controllers/flights/startFlightController.js"
 import stopFlightController from "../controllers/flights/stopFlightController.js"
-import checkGeofencingController from "../controllers/kml/checkGeofencingController.js"
 import addKMLController from "../controllers/kml/addKMLController.js"
 
 const router = express.Router()
@@ -90,7 +89,7 @@ router.post("/", verifyToken, cpUpload, addFlightController, addKMLController)
 router.delete("/:id", verifyToken, removeOneFlightController)
 router.put("/:id", verifyToken, cpUpload, updateFlightController)
 router.patch('/:id/submit', verifyToken, submitFlightController)
-router.patch('/:id/start-flight', verifyToken, startFlightController, checkGeofencingController)
+router.patch('/:id/start-flight', verifyToken, startFlightController)
 router.patch('/:id/stop-flight', verifyToken, stopFlightController)
 
 // ADMIN

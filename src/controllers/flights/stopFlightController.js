@@ -4,28 +4,37 @@ import { PilotModel } from "../../models/Pilots.js"
 
 const stopFlightController = async (req, res) => {
     try {
+        let response = {
+            code: "",
+            message: "",
+            data: {},
+        }
+
         const { id } = req.params
-        const { longitude, latitude, altitude, groundSpeed } = req.body
         
         const flight = await FlightModel.findById(id)
 
         await DroneModel.findByIdAndUpdate(
             flight.detailDrone.id,
-            { flightStatus: false },
-            { new: true }
+            { flightStatus: false }
         )
 
         for (const pilot of flight.pilot) {
-            const pl = await PilotModel.findByIdAndUpdate(
+            await PilotModel.findByIdAndUpdate(
                 pilot.id,
-                { flightStatus: false },
-                { new: true }
+                { flightStatus: false }
             )
         }
 
-        res.json({ message: 'Flight has been stopped' })
+        response.code = 200
+        response.message = "Flight has been stopped"
+        response.data = {}
+        return res.status(200).json(response)
     } catch (error) {
-        res.status(500).json({ error: 'Error stop flight ', details: error.message })
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 
