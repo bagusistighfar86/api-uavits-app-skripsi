@@ -17,22 +17,22 @@ const loginController = async (req, res) => {
         const { email, password } = req.body
         const user = await UserModel.findOne({ email })
         if (!user) {
-            response.code = 204
+            response.code = 400
             response.message = "Please check the email and password"
             response.data = {}
-            return res.status(204).json(response)
+            return res.status(400).json(response)
         } else {
             const isPasswordValid = await bcrypt.compare(password, user.password)
 
             if (!isPasswordValid) {
-                response.code = 204
+                response.code = 400
                 response.message = "Email or password is incorrect"
                 response.data = {}
-                return res.status(204).json(response)
+                return res.status(400).json(response)
             } else {
                 const token = jwt.sign({ id: user._id, role: user.role }, PRIVATE_KEY, { expiresIn: '1d' })
 
-                response.code = 500
+                response.code = 200
                 response.message = "Login success. Enjoy your flight!"
                 response.data = {
                     token: token
