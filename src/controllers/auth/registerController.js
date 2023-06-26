@@ -4,7 +4,7 @@ import { UserModel } from "../../models/Users.js"
 const registerController = async (req, res) => {
     try {
         let response = {
-            status: "",
+            code: "",
             message: "",
             data: {},
         }
