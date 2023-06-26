@@ -20,7 +20,7 @@ import addKMLController from "../controllers/kml/addKMLController.js"
 const router = express.Router()
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        let path
+        let path = ""
         if (file.fieldname === 'kml') {
             path = './assets/flight_kml/'
         }
@@ -43,8 +43,8 @@ const storage = multer.diskStorage({
         cb(null, path)
     },
     filename: function (req, file, cb) {
-        let extension
-        let fileName
+        let extension = ""
+        let fileName = ""
 
         if (file.fieldname === 'kml') {
             extension = file.originalname.split('.').pop()

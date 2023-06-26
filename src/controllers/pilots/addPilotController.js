@@ -1,12 +1,11 @@
 import { PilotModel } from "../../models/Pilots.js"
 
 const addPilotController = async (req, res) => {
-    const { name, phone, nik, certificateExpiredDate } = req.body
-
-    const certificate = req.files['certificate'][0]
-    const ktpPicture = req.files['ktpPicture'][0]
-
     try {
+        const { name, phone, nik, certificateExpiredDate } = req.body
+        const certificate = req.files['certificate'][0]
+        const ktpPicture = req.files['ktpPicture'][0]
+
         const pilot = await PilotModel.findOne({ nik })
 
         if (pilot) {
@@ -30,7 +29,7 @@ const addPilotController = async (req, res) => {
 
         res.status(200).json({ message: "Pilot created successfully" })
     } catch (e) {
-        res.status(500).json({ e, error: "Internal server error" })
+        res.status(500).json({ error: "Internal server error", detail: e.message })
     }
 }
 

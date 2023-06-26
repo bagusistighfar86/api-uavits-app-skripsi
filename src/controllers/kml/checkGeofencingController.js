@@ -2,31 +2,31 @@ import * as turf from "@turf/turf";
 import { KMLModel } from "../../models/KML.js";
 
 const checkGeofencingController = async (req, res) => {
-  let statusPenerbangan = "";
-  let msgPenerbangan = "";
-  let isInside = false;
-  let distToArea = 0;
-
-  // const { latitude, longitude, altitude, flightId } = req.body;
-
-  const longitude = req.longitude
-  const latitude = req.latitude
-  const altitude = req.altitude
-  const flightId = req.flightId
-
-  let code = 200;
-  let name = ""
-  let response = {
-    status: code,
-    message: "Data successfully retrieved",
-    data: {
-      status: statusPenerbangan,
-      message: msgPenerbangan,
-      area_name: name
-    },
-  };
-
   try {
+    let statusPenerbangan = "";
+    let msgPenerbangan = "";
+    let isInside = false;
+    let distToArea = 0;
+
+    // const { latitude, longitude, altitude, flightId } = req.body;
+
+    const longitude = req.longitude
+    const latitude = req.latitude
+    const altitude = req.altitude
+    const flightId = req.flightId
+
+    let code = 200;
+    let name = ""
+    let response = {
+      status: code,
+      message: "Data successfully retrieved",
+      data: {
+        status: statusPenerbangan,
+        message: msgPenerbangan,
+        area_name: name
+      },
+    };
+    
     let kmlModel = await KMLModel.findOne({ flightId: flightId });
 
     if (latitude === "" || longitude === "" || altitude === "" || !kmlModel) {

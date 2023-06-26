@@ -1,9 +1,8 @@
 import { FlightModel } from "../../models/Flights.js"
 
 const submitFlightController = async (req, res) => {
-    const { id } = req.params
-
     try {
+        const { id } = req.params
         const updatedData = {
             $set: {
                 statusVerification: "waiting",
@@ -30,7 +29,7 @@ const submitFlightController = async (req, res) => {
 
         return res.status(200).json({ message: "Flight has been submitted", flight })
     } catch (error) {
-        res.status(500).json({ error: "Internal server error" })
+        res.status(500).json({ error: "Internal server error", detail: error.message })
     }
 }
 

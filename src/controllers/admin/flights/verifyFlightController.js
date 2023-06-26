@@ -2,9 +2,8 @@ import { FlightModel } from "../../../models/Flights.js"
 
 
 const verifyFlightController = async (req, res) => {
-    const { id } = req.params
-
     try {
+        const { id } = req.params
         const { statusVerification, noteVerification } = req.body
 
         const updatedData = {
@@ -28,7 +27,7 @@ const verifyFlightController = async (req, res) => {
 
         return res.status(200).json({ message: "Flight has been verified", flight })
     } catch (error) {
-        res.status(500).json({ error: "Internal server error" })
+        res.status(500).json({ error: "Internal server error", detail: error.message })
     }
 }
 

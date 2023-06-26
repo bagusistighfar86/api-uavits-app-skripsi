@@ -1,18 +1,18 @@
 import { HistoryModel } from "../../models/Histories.js"
 
 const searchHistoryController = async (req, res) => {
-    const search = req.query.search || ""
-    const category = req.body.category
-
-    let query = {
-        auth: {
-            userId: req.userId,
-            role: req.role
-        }
-    }
-
-    let histories
     try {
+        const search = req.query.search || ""
+        const category = req.body.category
+    
+        let query = {
+            auth: {
+                userId: req.userId,
+                role: req.role
+            }
+        }
+    
+        let histories
         if (category && category.length > 0 && search) {
             const searchOptions = []
 
@@ -37,7 +37,7 @@ const searchHistoryController = async (req, res) => {
             return res.status(400).json({ error: 'Invalid request' })
         }
     } catch (e) {
-        res.status(500).json({ e, error: 'Internal server error' })
+        res.status(500).json({ e, error: 'Internal server error', detail: e.message })
     }
 }
 

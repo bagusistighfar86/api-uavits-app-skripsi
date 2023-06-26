@@ -2,9 +2,8 @@ import { PostFlightReportModel } from "../../models/PostFlightReports.js"
 
 
 const submitPostFlightReportController = async (req, res) => {
-    const { id } = req.params
-
     try {
+        const { id } = req.params
         const updatedData = {
             $set: {
                 statusVerification: "waiting",
@@ -31,7 +30,7 @@ const submitPostFlightReportController = async (req, res) => {
 
         return res.status(200).json({ message: "Post flight report has been submitted", pfr })
     } catch (e) {
-        res.status(500).json({ e, error: "Internal server error" })
+        res.status(500).json({ error: "Internal server error", detail: e.message })
     }
 }
 

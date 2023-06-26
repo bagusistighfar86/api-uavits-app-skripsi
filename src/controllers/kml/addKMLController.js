@@ -4,13 +4,12 @@ import { kml as converter } from "@tmcw/togeojson";
 import { KMLModel } from "../../models/KML.js";
 
 const addKMLController = async (req, res) => {
-    const DOMParser = xmldom.DOMParser;
-
-    // const kmlFile = req.files['kml'][0]
-    
-    const kmlPath = req.kmlFile.path
-
     try {
+        const DOMParser = xmldom.DOMParser;
+    
+        // const kmlFile = req.files['kml'][0]
+        
+        const kmlPath = req.kmlFile.path
         const parsedKML = new DOMParser().parseFromString(fs.readFileSync(kmlPath, "utf8"));
         const geojson = converter(parsedKML);
         const item = geojson.features

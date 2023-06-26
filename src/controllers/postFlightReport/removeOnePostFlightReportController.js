@@ -1,9 +1,8 @@
 import { PostFlightReportModel } from "../../models/PostFlightReports.js"
 
 const removeOnePostFlightReportController = async (req, res) => {
-    const { id } = req.params
-
     try {
+        const { id } = req.params
         const pfr = await PostFlightReportModel.findOneAndRemove({
             _id: id,
             auth: {
@@ -17,7 +16,7 @@ const removeOnePostFlightReportController = async (req, res) => {
 
         return res.status(200).json({ message: "Post flight report deleted succesfull" })
     } catch (error) {
-        res.status(500).json({ error: "Internal server error" })
+        res.status(500).json({ error: "Internal server error", detail: error.message })
     }
 }
 

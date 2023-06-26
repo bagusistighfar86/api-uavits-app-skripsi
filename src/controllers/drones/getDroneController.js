@@ -11,7 +11,7 @@ const getDroneController = async (req, res) => {
 
         return res.status(200).json(drones)
     } catch (e) {
-        res.status(500).json({ e, error: "Internal server error" })
+        res.status(500).json({ e, error: "Internal server error", detail: e.message })
     }
 }
 

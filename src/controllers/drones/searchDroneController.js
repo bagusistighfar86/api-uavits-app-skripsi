@@ -1,18 +1,18 @@
 import { DroneModel } from "../../models/Drones.js"
 
 const searchDroneController = async (req, res) => {
-    const search = req.query.search || ""
-    const category = req.body.category
-
-    let query = {
-        auth: {
-            userId: req.userId,
-            role: req.role
-        }
-    }
-
-    let drones
     try {
+        const search = req.query.search || ""
+        const category = req.body.category
+
+        let query = {
+            auth: {
+                userId: req.userId,
+                role: req.role
+            }
+        }
+
+        let drones
         if (category && category.length > 0 && search) {
             const searchOptions = []
 
@@ -42,11 +42,11 @@ const searchDroneController = async (req, res) => {
 
             return res.json(drones)
         } else {
-            
+
             return res.status(400).json({ error: 'Invalid request' })
         }
     } catch (e) {
-        res.status(500).json({ e, error: 'Internal server error' })
+        res.status(500).json({ e, error: 'Internal server error', detail: e.message })
     }
 }
 

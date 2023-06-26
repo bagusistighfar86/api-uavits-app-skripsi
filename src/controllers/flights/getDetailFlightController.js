@@ -1,9 +1,8 @@
 import { FlightModel } from "../../models/Flights.js"
 
 const getDetailFlightController = async (req, res) => {
-    const { id } = req.params
-
     try {
+        const { id } = req.params
         const flight = await FlightModel.findOne({
             _id: id,
             auth: {
@@ -17,7 +16,7 @@ const getDetailFlightController = async (req, res) => {
 
         return res.status(200).json(flight)
     } catch (error) {
-        res.status(500).json({ error: "Internal server error" })
+        res.status(500).json({ error: "Internal server error", detail: error.message })
     }
 }
 

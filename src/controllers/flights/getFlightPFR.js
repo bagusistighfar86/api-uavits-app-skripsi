@@ -12,7 +12,7 @@ const getFlightPFRController = async (req, res) => {
 
         return res.status(200).json(flights)
     } catch (error) {
-        res.status(500).json({ error: "Internal server error" })
+        res.status(500).json({ error: "Internal server error", detail: error.message })
     }
 }
 

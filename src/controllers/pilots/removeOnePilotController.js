@@ -1,9 +1,8 @@
 import { PilotModel } from "../../models/Pilots.js"
 
 const removeOnePilotController = async (req, res) => {
-    const { id } = req.params
-
     try {
+        const { id } = req.params
         const pilot = await PilotModel.findOneAndRemove({
             _id: id,
             auth: {
@@ -17,7 +16,7 @@ const removeOnePilotController = async (req, res) => {
 
         return res.status(200).json({ message: "Pilot deleted succesfull" })
     } catch (error) {
-        res.status(500).json({ error: "Internal server error" })
+        res.status(500).json({ error: "Internal server error", detail: error.message })
     }
 }
 

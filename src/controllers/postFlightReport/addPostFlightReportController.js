@@ -2,13 +2,12 @@ import { FlightModel } from "../../models/Flights.js"
 import { PostFlightReportModel } from "../../models/PostFlightReports.js"
 
 const addPostFlightReportController = async (req, res) => {
-    const pfrDetail = JSON.parse(req.body.pfrDetail)
-    const flightDetail = JSON.parse(req.body.flightDetail)
-    const userDetail = JSON.parse(req.body.userDetail)
-
-    const notam = req.files['notam'][0]
-
     try {
+        const pfrDetail = JSON.parse(req.body.pfrDetail)
+        const flightDetail = JSON.parse(req.body.flightDetail)
+        const userDetail = JSON.parse(req.body.userDetail)
+    
+        const notam = req.files['notam'][0]
         const pfr = await PostFlightReportModel.findOne({
             'flightDetail.id': flightDetail?.id
         })
@@ -52,7 +51,7 @@ const addPostFlightReportController = async (req, res) => {
 
         res.status(200).json({ message: "Post flight report created successfully" })
     } catch (e) {
-        res.status(500).json({ e, error: "Internal server error" })
+        res.status(500).json({ error: "Internal server error", detail: e.message })
     }
 }
 

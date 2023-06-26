@@ -8,7 +8,7 @@ import checkGeofencingController from "../controllers/kml/checkGeofencingControl
 const router = express.Router()
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        let path
+        let path = ""
         if (file.fieldname === 'kml') {
             path = './assets/kml/'
         }  else {
@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
         cb(null, path)
     },
     filename: function (req, file, cb) {
-        let fileName
+        let fileName = ""
         if (file.fieldname === 'kml') {
             const extension = file.originalname.split('.').pop()
             fileName = `kml-${uuidv4()}.${extension}`

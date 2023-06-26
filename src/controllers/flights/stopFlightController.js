@@ -3,10 +3,10 @@ import { FlightModel } from "../../models/Flights.js"
 import { PilotModel } from "../../models/Pilots.js"
 
 const stopFlightController = async (req, res) => {
-    const { id } = req.params
-    const { longitude, latitude, altitude, groundSpeed } = req.body
-
     try {
+        const { id } = req.params
+        const { longitude, latitude, altitude, groundSpeed } = req.body
+        
         const flight = await FlightModel.findById(id)
 
         await DroneModel.findByIdAndUpdate(

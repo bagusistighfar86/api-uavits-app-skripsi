@@ -3,8 +3,8 @@ import { FlightModel } from "../../models/Flights.js"
 import { HistoryModel } from "../../models/Histories.js"
 
 const addHistoryController = async (req, res) => {
-    const flightId = req.flightId
     try {
+        const flightId = req.flightId
         const history = await HistoryModel.findOne({
             'historyFlightDetail.id' : flightId
         })
@@ -48,7 +48,7 @@ const addHistoryController = async (req, res) => {
 
         await newHistory.save()
     } catch (e) {
-        res.status(500).json({ e, error: "Internal server error" })
+        res.status(500).json({ e, error: "Internal server error", detail: e.message })
     }
 }
 

@@ -7,9 +7,8 @@ dotenv.config()
 const PRIVATE_KEY = process.env.JWT_PRIVATE_KEY
 
 const loginController = async (req, res) => {
-    const { email, password } = req.body
-
     try {
+        const { email, password } = req.body
         const user = await UserModel.findOne({ email })
         if (!user) {
             return res.status(401).json({ error: "User doesn't exist!" })
@@ -28,7 +27,7 @@ const loginController = async (req, res) => {
             }
         }
     } catch (e) {
-        return res.status(500).json({ e, error: "Internal server error" })
+        return res.status(500).json({ e, error: "Internal server error", detail: e.message })
     }
 }
 

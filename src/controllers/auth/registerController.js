@@ -2,9 +2,8 @@ import bcrypt from "bcrypt"
 import { UserModel } from "../../models/Users.js"
 
 const registerController = async (req, res) => {
-    const { email, password, confirmPassword, name, address, phoneNumber, role } = req.body
-
     try {
+        const { email, password, confirmPassword, name, address, phoneNumber, role } = req.body
         const user = await UserModel.findOne({ email })
         if (user) {
             return res.status(400).json({ error: "User already registered" })
@@ -35,7 +34,7 @@ const registerController = async (req, res) => {
 
         res.status(200).json({ message: "Registration successful" })
     } catch (e) {
-        res.status(500).json({e, error: "Internal server error" })
+        res.status(500).json({e, error: "Internal server error", detail: e.message })
     }
 }
 

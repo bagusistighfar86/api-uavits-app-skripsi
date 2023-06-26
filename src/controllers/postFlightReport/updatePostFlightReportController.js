@@ -4,15 +4,14 @@ import path, { dirname, join } from 'path'
 import { PostFlightReportModel } from "../../models/PostFlightReports.js"
 
 const updatePostFlightReportController = async (req, res) => {
-    const { id } = req.params
-
-    const pfrDetail = JSON.parse(req.body.pfrDetail)
-    const flightDetail = JSON.parse(req.body.flightDetail)
-    const userDetail = JSON.parse(req.body.userDetail)
-
-    const notam = req.files['notam'][0]
-
     try {
+        const { id } = req.params
+    
+        const pfrDetail = JSON.parse(req.body.pfrDetail)
+        const flightDetail = JSON.parse(req.body.flightDetail)
+        const userDetail = JSON.parse(req.body.userDetail)
+    
+        const notam = req.files['notam'][0]
         const newDocument = {
             notam: notam.path.replace(/\\/g, '/'),
         }
@@ -48,7 +47,7 @@ const updatePostFlightReportController = async (req, res) => {
 
         return res.status(200).json({ message: "Post flight report  updated succesfull", lastPFR })
     } catch (error) {
-        res.status(500).json({ error: "Internal server error" })
+        res.status(500).json({ error: "Internal server error", detail: error.message })
     }
 }
 

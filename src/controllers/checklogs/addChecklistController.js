@@ -14,7 +14,7 @@ const addChecklistController = async (req, res) => {
         await newChecklist.save()
         return newChecklist
     } catch (e) {
-        res.status(500).json({ e, error: "Internal server error" })
+        res.status(500).json({ e, error: "Internal server error", detail: e.message })
     }
 }
 

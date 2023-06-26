@@ -4,13 +4,12 @@ import path, { dirname, join } from 'path'
 import { PilotModel } from "../../models/Pilots.js"
 
 const updatePilotController = async (req, res) => {
-    const { id } = req.params
-    const { name, phone, nik, certificateExpiredDate } = req.body
-
-    const certificate = req.files['certificate'][0]
-    const ktpPicture = req.files['ktpPicture'][0]
-
     try {
+        const { id } = req.params
+        const { name, phone, nik, certificateExpiredDate } = req.body
+    
+        const certificate = req.files['certificate'][0]
+        const ktpPicture = req.files['ktpPicture'][0]
         const updatedData = {
             name,
             phone,

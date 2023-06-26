@@ -2,9 +2,9 @@ import mongoose from "mongoose"
 import { PostFlightReportModel } from "../../../models/PostFlightReports.js"
 
 const verifyPostFlightReportController = async (req, res, next) => {
-    const { id } = req.params
-
     try {
+        const { id } = req.params
+
         const { statusVerification, noteVerification } = req.body
 
         const updatedData = {
@@ -30,7 +30,7 @@ const verifyPostFlightReportController = async (req, res, next) => {
 
             return res.status(200).json({ message: "Post flight report has been verified", pfr })
         }
-        
+
         const session = await mongoose.startSession()
         session.startTransaction()
 
@@ -48,7 +48,7 @@ const verifyPostFlightReportController = async (req, res, next) => {
             req.role = pfr.auth?.role
 
             next()
-            
+
             await PostFlightReportModel.findByIdAndUpdate(
                 id,
                 updatedData,
@@ -64,8 +64,8 @@ const verifyPostFlightReportController = async (req, res, next) => {
             session.endSession()
             return res.status(500).json({ error: 'Error adding post-flight report', details: error.message })
         }
-    } catch (e) {
-        res.status(500).json({ e, error: "Internal server error" })
+    } catch (error) {
+        res.status(500).json({ error, error: "Internal server error", detail: error.message })
     }
 }
 

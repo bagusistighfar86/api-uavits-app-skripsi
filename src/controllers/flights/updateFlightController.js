@@ -4,19 +4,18 @@ import path, { dirname, join } from 'path'
 import { FlightModel } from "../../models/Flights.js"
 
 const updateFlightController = async (req, res) => {
-    const { id } = req.params
-    const { flightDate, takeOffPoint, landingPoint } = req.body
-    
-    const detailDrone = JSON.parse(req.body.detailDrone)
-    const pilot = JSON.parse(req.body.pilot)
-
-    const kml = req.files['kml'][0]
-    const airspaceAssessment = req.files['airspaceAssessment'][0]
-    const dnpPermit = req.files['dnpPermit'][0]
-    const militaryPermit = req.files['militaryPermit'][0]
-    const authorityPermit = req.files['authorityPermit'][0]
-
     try {
+        const { id } = req.params
+        const { flightDate, takeOffPoint, landingPoint } = req.body
+        
+        const detailDrone = JSON.parse(req.body.detailDrone)
+        const pilot = JSON.parse(req.body.pilot)
+    
+        const kml = req.files['kml'][0]
+        const airspaceAssessment = req.files['airspaceAssessment'][0]
+        const dnpPermit = req.files['dnpPermit'][0]
+        const militaryPermit = req.files['militaryPermit'][0]
+        const authorityPermit = req.files['authorityPermit'][0]
         const newKML = {
             name: "",
             coordinates: [],

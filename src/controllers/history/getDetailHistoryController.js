@@ -1,9 +1,8 @@
 import { HistoryModel } from "../../models/Histories.js"
 
 const getDetailHistoryController = async (req, res) => {
-    const { id } = req.params
-
     try {
+        const { id } = req.params
         const history = await HistoryModel.findOne({
             _id: id,
             auth: {
@@ -17,7 +16,7 @@ const getDetailHistoryController = async (req, res) => {
 
         return res.status(200).json(history)
     } catch (error) {
-        res.status(500).json({ error: "Internal server error" })
+        res.status(500).json({ error: "Internal server error", detail: error.message })
     }
 }
 

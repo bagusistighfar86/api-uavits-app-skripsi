@@ -12,7 +12,7 @@ import searchDroneController from "../controllers/drones/searchDroneController.j
 const router = express.Router()
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        let path
+        let path = ""
         if (file.fieldname === 'dronePicture') {
             path = './assets/drone_picture/'
         }
@@ -35,8 +35,8 @@ const storage = multer.diskStorage({
         cb(null, path)
     },
     filename: function (req, file, cb) {
-        let extension
-        let fileName
+        let extension = ""
+        let fileName = ""
 
         if (file.fieldname === 'dronePicture') {
             extension = file.originalname.split('.').pop()

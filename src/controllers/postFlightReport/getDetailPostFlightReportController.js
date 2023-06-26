@@ -1,9 +1,8 @@
 import { PostFlightReportModel } from "../../models/PostFlightReports.js"
 
 const getDetailPostFlightReportController = async (req, res) => {
-    const { id } = req.params
-
     try {
+        const { id } = req.params
         const pfr = await PostFlightReportModel.findOne({
             _id: id,
             auth: {
@@ -17,7 +16,7 @@ const getDetailPostFlightReportController = async (req, res) => {
 
         return res.status(200).json(pfr)
     } catch (error) {
-        res.status(500).json({ error: "Internal server error" })
+        res.status(500).json({ error: "Internal server error", detail: error.message })
     }
 }
 

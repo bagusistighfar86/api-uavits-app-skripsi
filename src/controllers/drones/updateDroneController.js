@@ -4,19 +4,18 @@ import path, { dirname, join } from 'path'
 import { DroneModel } from "../../models/Drones.js"
 
 const updateDroneController = async (req, res) => {
-    const { id } = req.params
-    const { name, serialNumber, expiredDate } = req.body
-
-    const specifications = JSON.parse(req.body.specifications)
-    const transponder = JSON.parse(req.body.transponder)
-
-    const dronePicture = req.files['dronePicture'][0]
-    const emergencyProcedure = req.files['emergencyProcedure'][0]
-    const insuranceDocument = req.files['insuranceDocument'][0]
-    const listOfEquipment = req.files['listOfEquipment'][0]
-    const droneCertificate = req.files['droneCertificate'][0]
-
     try {
+        const { id } = req.params
+        const { name, serialNumber, expiredDate } = req.body
+
+        const specifications = JSON.parse(req.body.specifications)
+        const transponder = JSON.parse(req.body.transponder)
+
+        const dronePicture = req.files['dronePicture'][0]
+        const emergencyProcedure = req.files['emergencyProcedure'][0]
+        const insuranceDocument = req.files['insuranceDocument'][0]
+        const listOfEquipment = req.files['listOfEquipment'][0]
+        const droneCertificate = req.files['droneCertificate'][0]
         const newDocument = {
             dronePicture: dronePicture.path.replace(/\\/g, '/'),
             emergencyProcedure: emergencyProcedure.path.replace(/\\/g, '/'),
@@ -24,7 +23,7 @@ const updateDroneController = async (req, res) => {
             listOfEquipment: listOfEquipment.path.replace(/\\/g, '/'),
             droneCertificate: droneCertificate.path.replace(/\\/g, '/'),
         }
-    
+
         const updatedData = {
             name,
             serialNumber,
@@ -34,7 +33,7 @@ const updateDroneController = async (req, res) => {
             transponder,
             updatedAt: new Date()
         }
-        
+
         const lastDrone = await DroneModel.findOneAndUpdate(
             {
                 _id: id,
@@ -61,7 +60,7 @@ const updateDroneController = async (req, res) => {
 
         return res.status(200).json({ message: "Drone updated succesfull", lastDrone })
     } catch (error) {
-        res.status(500).json({ error: "Internal server error" , detail: error.message})
+        res.status(500).json({ error: "Internal server error", detail: error.message })
     }
 }
 

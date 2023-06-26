@@ -70,7 +70,7 @@ const updateChecklistController = async (req, res) => {
 
         res.status(200).json({ message: "Checklist updated successfully" })
     } catch (e) {
-        res.status(500).json({ error: "Internal server error" })
+        res.status(500).json({ error: "Internal server error", detail: error.message })
     }
 }
 

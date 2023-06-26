@@ -2,18 +2,17 @@ import { FlightModel } from "../../models/Flights.js"
 import addChecklistController from "../checklogs/addChecklistController.js"
 
 const addFlightController = async (req, res, next) => {
-    const { flightDate, takeOffPoint, landingPoint } = req.body
-
-    const detailDrone = JSON.parse(req.body.detailDrone)
-    const pilot = JSON.parse(req.body.pilot)
-
-    const kml = req.files['kml'][0]
-    const airspaceAssessment = req.files['airspaceAssessment'][0]
-    const dnpPermit = req.files['dnpPermit'][0]
-    const militaryPermit = req.files['militaryPermit'][0]
-    const authorityPermit = req.files['authorityPermit'][0]
-
     try {
+        const { flightDate, takeOffPoint, landingPoint } = req.body
+
+        const detailDrone = JSON.parse(req.body.detailDrone)
+        const pilot = JSON.parse(req.body.pilot)
+
+        const kml = req.files['kml'][0]
+        const airspaceAssessment = req.files['airspaceAssessment'][0]
+        const dnpPermit = req.files['dnpPermit'][0]
+        const militaryPermit = req.files['militaryPermit'][0]
+        const authorityPermit = req.files['authorityPermit'][0]
         const newKML = {
             name: "",
             coordinates: [],
@@ -99,8 +98,7 @@ const addFlightController = async (req, res, next) => {
 
         res.status(200).json({ message: "Flight & Checklists created successfully" })
     } catch (e) {
-        console.log(e)
-        res.status(500).json({ e, error: "Internal server error" })
+        res.status(500).json({ e, error: "Internal server error", detail: e.message })
     }
 }
 
