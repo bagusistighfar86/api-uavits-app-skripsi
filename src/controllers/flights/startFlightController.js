@@ -3,10 +3,9 @@ import { FlightModel } from "../../models/Flights.js"
 import { PilotModel } from "../../models/Pilots.js"
 
 const startFlightController = async (req, res, next) => {
-    const { id } = req.params
-    const { longitude, latitude, altitude, groundSpeed } = req.body
-
     try {
+        const { id } = req.params
+        const { longitude, latitude, altitude, groundSpeed } = req.body
         const flight = await FlightModel.findByIdAndUpdate(
             id,
             { $set: { flightStatus: true }, $push: { liveFlight: { longitude, latitude, altitude, groundSpeed } } },

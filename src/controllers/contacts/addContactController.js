@@ -16,7 +16,7 @@ const addContactController = async (req, res) => {
 
         res.status(200).json({ message: "Contact created successfully" })
     } catch (e) {
-        res.status(500).json({ e, error: "Internal server error",detail: e.message })
+        res.status(500).json({ e, error: "Internal server error", detail: e.message })
     }
 }
 

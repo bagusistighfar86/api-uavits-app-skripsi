@@ -14,8 +14,8 @@ import { contactRouter } from "./routes/contacts.js"
 import { kmlRouter } from "./routes/kml.js"
 
 const app = express()
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 app.use("/auth", userRouter)

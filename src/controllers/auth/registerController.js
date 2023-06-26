@@ -3,15 +3,27 @@ import { UserModel } from "../../models/Users.js"
 
 const registerController = async (req, res) => {
     try {
+        let response = {
+            status: "",
+            message: "",
+            data: {},
+        }
+
         const { email, password, confirmPassword, name, address, phoneNumber, role } = req.body
         const user = await UserModel.findOne({ email })
         if (user) {
-            return res.status(400).json({ error: "User already registered" })
+            response.code = 400
+            response.message = "User already registered. Try another!"
+            response.data = {}
+            return res.status(400).json(response)
         }
 
         const hashPassword = await bcrypt.hash(password, 10)
         if (password != confirmPassword) {
-            return res.json({ error: "Password and confirm password not match!" })
+            response.code = 400
+            response.message = "Password and confirm password not match!"
+            response.data = {}
+            return res.status(400).json(response)
         }
 
         const newUser = new UserModel({
@@ -32,9 +44,15 @@ const registerController = async (req, res) => {
 
         await newUser.save()
 
-        res.status(200).json({ message: "Registration successful" })
+        response.code = 201
+        response.message = "Registration successful"
+        response.data = newUser
+        return res.status(201).json(response)
     } catch (e) {
-        res.status(500).json({e, error: "Internal server error", detail: e.message })
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 
