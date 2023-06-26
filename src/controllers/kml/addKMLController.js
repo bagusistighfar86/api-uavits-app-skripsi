@@ -5,6 +5,12 @@ import { KMLModel } from "../../models/KML.js";
 
 const addKMLController = async (req, res) => {
     try {
+        let response = {
+            code: "",
+            message: "",
+            data: {},
+        }
+
         const DOMParser = xmldom.DOMParser;
     
         // const kmlFile = req.files['kml'][0]
@@ -37,7 +43,10 @@ const addKMLController = async (req, res) => {
 
         await newKML.save()
     } catch (e) {
-        res.status(500).json({ error: "Internal server error", detail: e.message })
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 
