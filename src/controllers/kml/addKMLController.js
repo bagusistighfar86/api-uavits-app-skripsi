@@ -4,12 +4,12 @@ import { kml as converter } from "@tmcw/togeojson";
 import { KMLModel } from "../../models/KML.js";
 
 const addKMLController = async (req, res) => {
+    let response = {
+        code: "",
+        message: "",
+        data: {},
+    }
     try {
-        let response = {
-            code: "",
-            message: "",
-            data: {},
-        }
 
         const DOMParser = xmldom.DOMParser;
     

@@ -26,7 +26,7 @@ const checkGeofencingController = async (req, res) => {
         area_name: name
       },
     }
-    
+
     let kmlModel = await KMLModel.findOne({ flightId: flightId })
 
     if (latitude === "" || longitude === "" || altitude === "" || !kmlModel) {
@@ -86,7 +86,10 @@ const checkGeofencingController = async (req, res) => {
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate")
     return res.status(200).json(response)
   } catch (e) {
-    res.status(500).json({ error: "Internal server error", detail: e.message })
+    response.data.status = 500
+    response.data.message = e.message
+    response.data.area_name = ""
+    res.status(500).json(response)
   }
 }
 

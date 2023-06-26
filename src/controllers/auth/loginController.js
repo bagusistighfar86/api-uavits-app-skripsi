@@ -7,12 +7,12 @@ dotenv.config()
 const PRIVATE_KEY = process.env.JWT_PRIVATE_KEY
 
 const loginController = async (req, res) => {
+    let response = {
+        code: "",
+        message: "",
+        data: {},
+    }
     try {
-        let response = {
-            code: "",
-            message: "",
-            data: {},
-        }
 
         const { email, password } = req.body
         const user = await UserModel.findOne({ email })

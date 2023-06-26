@@ -2,12 +2,12 @@ import bcrypt from "bcrypt"
 import { UserModel } from "../../models/Users.js"
 
 const registerController = async (req, res) => {
+    let response = {
+        code: "",
+        message: "",
+        data: {},
+    }
     try {
-        let response = {
-            code: "",
-            message: "",
-            data: {},
-        }
 
         const { email, password, confirmPassword, name, address, phoneNumber, role } = req.body
         const user = await UserModel.findOne({ email })
