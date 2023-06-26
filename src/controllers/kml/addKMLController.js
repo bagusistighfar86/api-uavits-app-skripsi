@@ -1,22 +1,22 @@
 import fs from "fs"
-import xmldom from "xmldom"
-import { kml as converter } from "@tmcw/togeojson"
-import { KMLModel } from "../../models/KML.js"
+import xmldom from "xmldom";
+import { kml as converter } from "@tmcw/togeojson";
+import { KMLModel } from "../../models/KML.js";
 
 const addKMLController = async (req, res) => {
     try {
-        const DOMParser = xmldom.DOMParser
+        const DOMParser = xmldom.DOMParser;
     
         // const kmlFile = req.files['kml'][0]
         
         const kmlPath = req.kmlFile.path
-        const parsedKML = new DOMParser().parseFromString(fs.readFileSync(kmlPath, "utf8"))
-        const geojson = converter(parsedKML)
+        const parsedKML = new DOMParser().parseFromString(fs.readFileSync(kmlPath, "utf8"));
+        const geojson = converter(parsedKML);
         const item = geojson.features
 
         let key
         let newArea = {}
-        for (var i = 0 i < geojson.features.length i++) {
+        for (var i = 0; i < geojson.features.length; i++) {
             if (item[i].geometry) {
                 if (item[i].geometry.type.toLowerCase() === "polygon") {
                     key = item[i]?.properties?.name || ""
