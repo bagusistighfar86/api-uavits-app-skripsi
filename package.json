@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "nodemon api/index.js"
   },
   "dependencies": {
     "@tmcw/togeojson": "^5.7.0",

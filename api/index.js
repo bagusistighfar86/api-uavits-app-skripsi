@@ -14,20 +14,29 @@ import { contactRouter } from "./routes/contacts.js"
 import { kmlRouter } from "./routes/kml.js"
 
 const app = express()
-app.use(express.json())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 
-app.use("/auth", userRouter)
-app.use("/pilots", pilotRouter)
-app.use("/drones", droneRouter)
-app.use("/flights", flightRouter)
-app.use("/pfr", postFlightReportRouter)
-app.use("/histories", historyRouter)
-app.use("/checklists", checklistRouter)
-app.use("/contacts", contactRouter)
-app.use("/kml", kmlRouter)
+app.use("/api/auth", userRouter)
+app.use("/api/pilots", pilotRouter)
+app.use("/api/drones", droneRouter)
+app.use("/api/flights", flightRouter)
+app.use("/api/pfr", postFlightReportRouter)
+app.use("/api/histories", historyRouter)
+app.use("/api/checklists", checklistRouter)
+app.use("/api/contacts", contactRouter)
+app.use("/api/kml", kmlRouter)
 
-app.use('/assets', express.static('assets'))
+app.use('/api/assets', express.static('assets'))
+
+app.get("/api", (req, res) => {
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    return res.status(200).json({
+      message: "Welcome to UAVITS APP API!",
+    });
+  });
 
 dotenv.config()
 const DB_PASS = process.env.DB_PASS
