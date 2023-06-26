@@ -11,6 +11,7 @@ import { postFlightReportRouter } from "./routes/postFlightReports.js"
 import { historyRouter } from "./routes/histories.js"
 import { checklistRouter } from "./routes/checklists.js"
 import { contactRouter } from "./routes/contacts.js"
+import { kmlRouter } from "./routes/kml.js"
 
 const app = express()
 app.use(express.json())
@@ -24,6 +25,9 @@ app.use("/pfr", postFlightReportRouter)
 app.use("/histories", historyRouter)
 app.use("/checklists", checklistRouter)
 app.use("/contacts", contactRouter)
+app.use("/kml", kmlRouter)
+
+app.use('/assets', express.static('assets'))
 
 dotenv.config()
 const DB_PASS = process.env.DB_PASS

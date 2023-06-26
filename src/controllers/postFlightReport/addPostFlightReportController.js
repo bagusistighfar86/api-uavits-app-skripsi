@@ -1,8 +1,13 @@
 import { FlightModel } from "../../models/Flights.js"
 import { PostFlightReportModel } from "../../models/PostFlightReports.js"
 
-const addPostFlightReportController = async (req, res, next) => {
-    const { pfrDetail, flightDetail, userDetail, document } = req.body
+const addPostFlightReportController = async (req, res) => {
+    const pfrDetail = JSON.parse(req.body.pfrDetail)
+    const flightDetail = JSON.parse(req.body.flightDetail)
+    const userDetail = JSON.parse(req.body.userDetail)
+
+    const notam = req.files['notam'][0]
+
     try {
         const pfr = await PostFlightReportModel.findOne({
             'flightDetail.id': flightDetail?.id
@@ -17,46 +22,13 @@ const addPostFlightReportController = async (req, res, next) => {
         }
 
         const newDocument = {
-            notam: document?.notam,
-        }
-
-        const newAbnormalOperation = {
-            selectedOption: pfrDetail?.abnormalOperation?.selectedOption,
-            otherOption: pfrDetail?.abnormalOperation?.otherOption
-        }
-
-        const newFlightAccident = {
-            selectedOption: pfrDetail?.flightAccident?.selectedOption,
-            otherOption: pfrDetail?.flightAccident?.otherOption
-        }
-
-        const newUserDetail = {
-            operatorName: userDetail?.operatorName,
-            operatorEmail: userDetail?.operatorEmail
-        }
-
-        const newFlightDetail = {
-            id: flightDetail?.id,
-            flightDate: flightDetail?.flightDate,
-            departure: flightDetail?.departure,
-            arrival: flightDetail?.arrival,
-            pilot: flightDetail?.pilot
-        }
-
-        const newPFRDetail = {
-            operatingPermitNumber: pfrDetail?.operatingPermitNumber,
-            notamNumber: pfrDetail?.notamNumber,
-            isSafeFlight: pfrDetail?.isSafeFlight,
-            isOutRange: pfrDetail?.isOutRange,
-            descOutRange: pfrDetail?.descOutRange,
-            flightAccident: newFlightAccident,
-            abnormalOperation: newAbnormalOperation,
+            notam: notam.path.replace(/\\/g, '/'),
         }
 
         const newPFR = new PostFlightReportModel({
-            pfrDetail: newPFRDetail,
-            flightDetail: newFlightDetail,
-            userDetail: newUserDetail,
+            pfrDetail,
+            flightDetail,
+            userDetail,
             document: newDocument,
             auth: {
                 userId: req.userId,

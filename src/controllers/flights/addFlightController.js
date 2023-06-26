@@ -1,37 +1,40 @@
 import { FlightModel } from "../../models/Flights.js"
 import addChecklistController from "../checklogs/addChecklistController.js"
 
-const addFlightController = async (req, res) => {
-    const { detailDrone, flightDate, takeOffPoint, landingPoint, pilot, document } = req.body
+const addFlightController = async (req, res, next) => {
+    const { flightDate, takeOffPoint, landingPoint } = req.body
+
+    const detailDrone = JSON.parse(req.body.detailDrone)
+    const pilot = JSON.parse(req.body.pilot)
+
+    const kml = req.files['kml'][0]
+    const airspaceAssessment = req.files['airspaceAssessment'][0]
+    const dnpPermit = req.files['dnpPermit'][0]
+    const militaryPermit = req.files['militaryPermit'][0]
+    const authorityPermit = req.files['authorityPermit'][0]
+
     try {
-        const newDetailDrone = {
-            id: detailDrone?.id,
-            name: detailDrone?.name,
-        }
-
-        const newFlightPilot = pilot
-
         const newKML = {
-            name: document?.kml?.name || "",
-            coordinates: document?.kml?.coordinates || [],
-            kmlFile: document?.kml?.kmlFile || ""
+            name: "",
+            coordinates: [],
+            kmlFile: kml.path.replace(/\\/g, '/')
         }
 
         const newDocument = {
             kml: newKML,
-            airspaceAssessment: document?.airspaceAssessment,
-            dnpPermit: document?.dnpPermit,
-            militaryPermit: document?.militaryPermit || "",
-            authorityPermit: document?.authorityPermit || "",
+            airspaceAssessment: airspaceAssessment.path.replace(/\\/g, '/'),
+            dnpPermit: dnpPermit.path.replace(/\\/g, '/'),
+            militaryPermit: militaryPermit.path.replace(/\\/g, '/'),
+            authorityPermit: authorityPermit.path.replace(/\\/g, '/'),
         }
 
         const newFlight = new FlightModel({
-            detailDrone: newDetailDrone,
+            detailDrone,
             flightDate,
             takeOffPoint,
             document: newDocument,
             landingPoint,
-            pilot: newFlightPilot,
+            pilot,
             auth: {
                 userId: req.userId,
                 role: req.role
@@ -87,10 +90,16 @@ const addFlightController = async (req, res) => {
         }
 
         savedFlight.detailChecklist = detailChecklist
+
+        req.kmlFile = kml
+
+        await next()
+
         await savedFlight.save()
 
         res.status(200).json({ message: "Flight & Checklists created successfully" })
     } catch (e) {
+        console.log(e)
         res.status(500).json({ e, error: "Internal server error" })
     }
 }

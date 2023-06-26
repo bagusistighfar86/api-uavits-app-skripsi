@@ -20,14 +20,15 @@ const registerController = async (req, res) => {
         })
 
         if (role === "company") {
-            const { companyDeed } = req.body
+            const companyDeed = req.files['companyDeed'][0]
 
-            newUser.companyDeed = companyDeed
+            newUser.companyDeed = companyDeed.path.replace(/\\/g, '/')
         } else if (role === "individual") {
-            const { nik, identityCard } = req.body
+            const identityCard = req.files['identityCard'][0]
+            const { nik } = req.body
 
             newUser.nik = nik
-            newUser.identityCard = identityCard
+            newUser.identityCard = identityCard.path.replace(/\\/g, '/')
         }
 
         await newUser.save()

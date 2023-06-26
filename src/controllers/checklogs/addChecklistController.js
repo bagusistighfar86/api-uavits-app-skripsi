@@ -3,20 +3,6 @@ import { ChecklistModel } from "../../models/Checklists.js"
 const addChecklistController = async (req, res) => {
     try {
         const { detailChecklist, type, flightId, auth } = req.body
-        
-        const checklist = await ChecklistModel.findOne(
-            {
-                $and: [
-                    { flightId: flightId },
-                    { type: type }
-                ]
-            }
-        )
-
-        if (checklist) {
-            return res.status(400).json({ error: "Flights & Checklist already registered" })
-        }
-
 
         const newChecklist = new ChecklistModel({
             detailChecklist,

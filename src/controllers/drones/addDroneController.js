@@ -1,7 +1,16 @@
 import { DroneModel } from "../../models/Drones.js"
 
 const addDroneController = async (req, res) => {
-    const { name, serialNumber, specifications, document, expiredDate, transponder } = req.body
+    const { name, serialNumber, expiredDate } = req.body
+    
+    const specifications = JSON.parse(req.body.specifications)
+    const transponder = JSON.parse(req.body.transponder)
+
+    const dronePicture = req.files['dronePicture'][0]
+    const emergencyProcedure = req.files['emergencyProcedure'][0]
+    const insuranceDocument = req.files['insuranceDocument'][0]
+    const listOfEquipment = req.files['listOfEquipment'][0]
+    const droneCertificate = req.files['droneCertificate'][0]
 
     try {
         const drone = await DroneModel.findOne({
@@ -15,44 +24,21 @@ const addDroneController = async (req, res) => {
             return res.status(400).json({ error: "Drone already registered" })
         }
 
-        const newSpecifications = {
-            maxTakeOffWeight: specifications?.maxTakeOffWeight,
-            weightWithoutPayload: specifications?.weightWithoutPayload,
-            maxFlightRange: specifications?.maxFlightRange,
-            cruiseSpeed: specifications?.cruiseSpeed,
-            maxCruiseHeight: specifications?.maxCruiseHeight,
-            operationalPayloadHeight: specifications?.operationalPayloadHeight,
-            operationalPayloadWeight: specifications?.operationalPayloadWeight,
-            fuselageMaterial: specifications?.fuselageMaterial,
-            wingMaterial: specifications?.wingMaterial,
-            proximitySensors: specifications?.proximitySensors,
-            precisionLandingMechanism: specifications?.precisionLandingMechanism,
-            fileSaveSystem: specifications?.fileSaveSystem,
-            operationSystem: specifications?.operationSystem,
-            controlSystem: specifications?.controlSystem,
-            communicationSystem: specifications?.communicationSystem,
-        }
-
         const newDocument = {
-            dronePicture: document?.dronePicture || "",
-            emergencyProcedure: document?.emergencyProcedure,
-            insuranceDocument: document?.insuranceDocument,
-            listOfEquipment: document?.listOfEquipment,
-            droneCertificate: document?.droneCertificate,
-        }
-
-        const newTransponder = {
-            name: transponder?.name,
-            imei: transponder?.imei,
+            dronePicture: dronePicture.path.replace(/\\/g, '/'),
+            emergencyProcedure: emergencyProcedure.path.replace(/\\/g, '/'),
+            insuranceDocument: insuranceDocument.path.replace(/\\/g, '/'),
+            listOfEquipment: listOfEquipment.path.replace(/\\/g, '/'),
+            droneCertificate: droneCertificate.path.replace(/\\/g, '/'),
         }
 
         const newDrone = new DroneModel({
             name,
             serialNumber,
-            specifications: newSpecifications,
+            specifications,
             document: newDocument,
             expiredDate,
-            transponder: newTransponder,
+            transponder,
             auth: {
                 userId: req.userId,
                 role: req.role

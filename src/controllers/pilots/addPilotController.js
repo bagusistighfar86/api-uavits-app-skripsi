@@ -1,7 +1,10 @@
 import { PilotModel } from "../../models/Pilots.js"
 
 const addPilotController = async (req, res) => {
-    const { name, phone, nik, ktpPicture, certificateExpiredDate, certificate } = req.body
+    const { name, phone, nik, certificateExpiredDate } = req.body
+
+    const certificate = req.files['certificate'][0]
+    const ktpPicture = req.files['ktpPicture'][0]
 
     try {
         const pilot = await PilotModel.findOne({ nik })
@@ -14,9 +17,9 @@ const addPilotController = async (req, res) => {
             name,
             phone,
             nik,
-            ktpPicture,
+            ktpPicture: ktpPicture.path.replace(/\\/g, '/'),
             certificateExpiredDate,
-            certificate,
+            certificate: certificate.path.replace(/\\/g, '/'),
             auth: {
                 userId: req.userId,
                 role: req.role
