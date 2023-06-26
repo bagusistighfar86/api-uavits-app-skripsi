@@ -28,7 +28,7 @@ app.use("/checklists", checklistRouter)
 app.use("/contacts", contactRouter)
 app.use("/kml", kmlRouter)
 
-app.use('/src/assets', express.static('assets'))
+app.use('/assets', express.static('assets'))
 
 dotenv.config()
 const DB_PASS = process.env.DB_PASS
