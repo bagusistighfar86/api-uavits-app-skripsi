@@ -2,6 +2,7 @@ import fs from "fs"
 import xmldom from "xmldom";
 import { kml as converter } from "@tmcw/togeojson";
 import { KMLModel } from "../../models/KML.js";
+import { FlightModel } from "../../models/Flights.js";
 
 const addKMLController = async (req, res) => {
     let response = {
@@ -42,10 +43,9 @@ const addKMLController = async (req, res) => {
             area: newArea,
         })
 
-        const flight = await FlightModel.findByIdAndUpdate(
+        await FlightModel.findByIdAndUpdate(
             flightId,
-            { $set: { 'document.kml.coordinates': newArea[0] } },
-            { new: true }
+            { $set: { 'document.kml.coordinates': newArea[0] } }
         )
 
         await newKML.save()
