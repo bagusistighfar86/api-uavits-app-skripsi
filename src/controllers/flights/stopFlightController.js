@@ -3,13 +3,12 @@ import { FlightModel } from "../../models/Flights.js"
 import { PilotModel } from "../../models/Pilots.js"
 
 const stopFlightController = async (req, res) => {
+    let response = {
+        code: "",
+        message: "",
+        data: {},
+    }
     try {
-        let response = {
-            code: "",
-            message: "",
-            data: {},
-        }
-
         const { id } = req.params
         
         const flight = await FlightModel.findById(id)
