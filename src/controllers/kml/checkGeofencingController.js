@@ -14,7 +14,7 @@ const checkGeofencingController = async (req, res) => {
     let code = 200
     let name = ""
     let response = {
-      status: code,
+      code: code,
       message: "Data successfully retrieved",
       data: {
         status: statusPenerbangan,
@@ -26,12 +26,11 @@ const checkGeofencingController = async (req, res) => {
     let kmlModel = await KMLModel.findOne({ flightId: flightId })
 
     if (latitude === "" || longitude === "" || altitude === "" || !kmlModel) {
-      code = 404
-      response.status = code
+      response.code = 404
       response.message = "Requested data not valid"
 
       res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate")
-      return res.status(code).json(response)
+      return res.status(404).json(response)
     }
 
     name = kmlModel.area.name
@@ -87,7 +86,8 @@ const checkGeofencingController = async (req, res) => {
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate")
     return res.status(200).json(response)
   } catch (e) {
-    response.data.status = 500
+    response.code = 500
+    response.data.status = "error"
     response.data.message = e.message
     response.data.area_name = ""
     res.status(500).json(response)
