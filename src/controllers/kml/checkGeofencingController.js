@@ -84,7 +84,7 @@ const checkGeofencingController = async (req, res) => {
 
     await FlightModel.findByIdAndUpdate(
       flightId,
-      { $push: { liveFlight: { longitude, latitude, altitude: altitude * meterToFeet, groundSpeed: groundSpeed * meterPerSecondToKnots } } },
+      { $push: { liveFlight: { longitude, latitude, altitude: altitude * meterToFeet, groundSpeed: groundSpeed * meterPerSecondToKnots, createdAt: new Date() } } },
     )
 
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate")

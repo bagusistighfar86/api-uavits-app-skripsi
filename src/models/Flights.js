@@ -35,6 +35,10 @@ const LiveCoordinatesSchema = new mongoose.Schema({
         required: true,
         default: 0.0
     },
+    createdAt: {
+        type: Date,
+        required: false
+    },
 })
 
 const KMLSchema = new mongoose.Schema({
