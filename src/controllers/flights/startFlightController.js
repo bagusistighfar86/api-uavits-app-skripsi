@@ -24,21 +24,41 @@ const startFlightController = async (req, res) => {
             return res.status(404).json(response)
         }
 
-        await DroneModel.findByIdAndUpdate(
+        const drone = await DroneModel.findByIdAndUpdate(
             flight.detailDrone.id,
-            { flightStatus: true }
+            { flightStatus: true },
+            { new: true }
         )
+
+        if (!drone) {
+            response.code = 404
+            response.message = "Drone not found"
+            response.data = {}
+            return res.status(404).json(response)
+        }
 
         for (const pilot of flight.pilot) {
             await PilotModel.findByIdAndUpdate(
                 pilot.id,
-                { flightStatus: true }
+                { flightStatus: true },
+                { new: true }
             )
+        }
+
+        if (!drone) {
+            response.code = 404
+            response.message = "Pilot not found"
+            response.data = {}
+            return res.status(404).json(response)
         }
 
         response.code = 200
         response.message = "Flight started"
-        response.data = {}
+        response.data = {
+            flight: flight,
+            drone: drone,
+            pilot: pilot,
+        }
         return res.status(200).json(response)
     } catch (e) {
         response.code = 500
