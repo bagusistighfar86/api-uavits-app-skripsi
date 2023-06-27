@@ -3,25 +3,26 @@ import { KMLModel } from "../../models/KML.js"
 import { FlightModel } from "../../models/Flights.js"
 
 const checkGeofencingController = async (req, res) => {
+  let statusPenerbangan = ""
+  let msgPenerbangan = ""
+
+  let code = 200
+  let name = ""
+  let response = {
+    code: code,
+    message: "Data successfully retrieved",
+    data: {
+      status: statusPenerbangan,
+      message: msgPenerbangan,
+      area_name: name
+    },
+  }
+
   try {
-    let statusPenerbangan = ""
-    let msgPenerbangan = ""
     let isInside = false
     let distToArea = 0
 
     const { latitude, longitude, altitude, groundSpeed, flightId } = req.body
-
-    let code = 200
-    let name = ""
-    let response = {
-      code: code,
-      message: "Data successfully retrieved",
-      data: {
-        status: statusPenerbangan,
-        message: msgPenerbangan,
-        area_name: name
-      },
-    }
 
     let kmlModel = await KMLModel.findOne({ flightId: flightId })
 

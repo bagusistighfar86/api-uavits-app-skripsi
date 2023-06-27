@@ -8,7 +8,7 @@ const PRIVATE_KEY = process.env.JWT_PRIVATE_KEY
 
 const loginController = async (req, res) => {
     let response = {
-        code: "",
+        code: 200,
         message: "",
         data: {},
     }

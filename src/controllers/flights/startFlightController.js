@@ -4,7 +4,7 @@ import { PilotModel } from "../../models/Pilots.js"
 
 const startFlightController = async (req, res) => {
     let response = {
-        code: "",
+        code: 200,
         message: "",
         data: {},
     }
@@ -37,19 +37,20 @@ const startFlightController = async (req, res) => {
             return res.status(404).json(response)
         }
 
-        for (const pilot of flight.pilot) {
-            await PilotModel.findByIdAndUpdate(
-                pilot.id,
+        let pilot
+        for (const item of flight.pilot) {
+            pilot = await PilotModel.findByIdAndUpdate(
+                item.id,
                 { flightStatus: true },
                 { new: true }
             )
-        }
 
-        if (!drone) {
-            response.code = 404
-            response.message = "Pilot not found"
-            response.data = {}
-            return res.status(404).json(response)
+            if (!pilot) {
+                response.code = 404
+                response.message = "Pilot not found"
+                response.data = {}
+                return res.status(404).json(response)
+            }
         }
 
         response.code = 200

@@ -3,7 +3,7 @@ import { UserModel } from "../../models/Users.js"
 
 const registerController = async (req, res) => {
     let response = {
-        code: "",
+        code: 200,
         message: "",
         data: {},
     }

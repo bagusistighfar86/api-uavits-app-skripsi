@@ -5,7 +5,7 @@ import { KMLModel } from "../../models/KML.js";
 
 const addKMLController = async (req, res) => {
     let response = {
-        code: "",
+        code: 200,
         message: "",
         data: {},
     }

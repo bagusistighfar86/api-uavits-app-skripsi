@@ -4,7 +4,7 @@ import { PilotModel } from "../../models/Pilots.js"
 
 const stopFlightController = async (req, res) => {
     let response = {
-        code: "",
+        code: 200,
         message: "",
         data: {},
     }
