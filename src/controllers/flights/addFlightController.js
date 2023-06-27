@@ -91,10 +91,10 @@ const addFlightController = async (req, res, next) => {
         savedFlight.detailChecklist = detailChecklist
 
         req.kmlFile = kml
+        req.flightId = savedFlight._id
+        req.savedFlight = savedFlight
 
-        await next()
-
-        await savedFlight.save()
+        next()
 
         res.status(200).json({ message: "Flight & Checklists created successfully" })
     } catch (e) {

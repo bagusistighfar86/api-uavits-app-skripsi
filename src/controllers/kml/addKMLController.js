@@ -14,6 +14,8 @@ const addKMLController = async (req, res) => {
         const DOMParser = xmldom.DOMParser;
     
         // const kmlFile = req.files['kml'][0]
+        const flightId = req.flightId
+        const savedFlight = req.savedFlight
         
         const kmlPath = req.kmlFile.path
         const parsedKML = new DOMParser().parseFromString(fs.readFileSync(kmlPath, "utf8"));
@@ -36,12 +38,15 @@ const addKMLController = async (req, res) => {
 
         const newKML = new KMLModel({
             key: key,
-            flightId: "F000001",
+            flightId: flightId,
             radius: 500,
             area: newArea,
         })
 
+        savedFlight.document.kml.coordinates = newArea[0]
+
         await newKML.save()
+        await savedFlight.save()
     } catch (e) {
         response.code = 500
         response.message = e.message
