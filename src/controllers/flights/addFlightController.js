@@ -94,7 +94,9 @@ const addFlightController = async (req, res, next) => {
         req.flightId = savedFlight._id
         req.savedFlight = savedFlight
 
-        next()
+        await next()
+
+        await savedFlight.save()
 
         res.status(200).json({ message: "Flight & Checklists created successfully" })
     } catch (e) {
