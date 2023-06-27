@@ -11,7 +11,10 @@ const stopFlightController = async (req, res) => {
     try {
         const { id } = req.params
         
-        const flight = await FlightModel.findById(id)
+        const flight = await FlightModel.findByIdAndUpdate(
+            id,
+            { flightStatus: false }
+        )
 
         await DroneModel.findByIdAndUpdate(
             flight.detailDrone.id,
