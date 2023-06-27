@@ -3,6 +3,9 @@ import { KMLModel } from "../../models/KML.js"
 import { FlightModel } from "../../models/Flights.js"
 
 const checkGeofencingController = async (req, res) => {
+  const meterToFeet = 3.2808399 
+  const meterPerSecondToKnots = 1.9438444924423 
+
   let statusPenerbangan = ""
   let msgPenerbangan = ""
 
@@ -81,7 +84,7 @@ const checkGeofencingController = async (req, res) => {
 
     await FlightModel.findByIdAndUpdate(
       flightId,
-      { $push: { liveFlight: { longitude, latitude, altitude, groundSpeed } } },
+      { $push: { liveFlight: { longitude, latitude, altitude: altitude * meterToFeet, groundSpeed: groundSpeed * meterPerSecondToKnots } } },
     )
 
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate")
