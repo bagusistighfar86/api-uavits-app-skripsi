@@ -41,7 +41,7 @@ const checkGeofencingController = async (req, res) => {
 
     let warningRad = kmlModel.radius
 
-    let polygonArea = kmlModel.area.coordinates[0]
+    let polygonArea = kmlModel.area.coordinates
 
     // if will use point
     // let pointArray = []

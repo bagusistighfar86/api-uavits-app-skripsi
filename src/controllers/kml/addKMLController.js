@@ -2,7 +2,6 @@ import fs from "fs"
 import xmldom from "xmldom";
 import { kml as converter } from "@tmcw/togeojson";
 import { KMLModel } from "../../models/KML.js";
-import { FlightModel } from "../../models/Flights.js";
 
 const addKMLController = async (req, res) => {
     let response = {
@@ -16,6 +15,7 @@ const addKMLController = async (req, res) => {
     
         // const kmlFile = req.files['kml'][0]
         const flightId = req.flightId
+        const savedFlight = req.savedFlight
         
         const kmlPath = req.kmlFile.path
         const parsedKML = new DOMParser().parseFromString(fs.readFileSync(kmlPath, "utf8"));
@@ -30,7 +30,7 @@ const addKMLController = async (req, res) => {
                     key = item[i]?.properties?.name || ""
                     newArea = {
                         name: item[i]?.properties?.name,
-                        coordinates: item[i]?.geometry?.coordinates
+                        coordinates: item[i]?.geometry?.coordinates[0]
                     }
                 }
             }
@@ -42,13 +42,13 @@ const addKMLController = async (req, res) => {
             radius: 500,
             area: newArea,
         })
-
-        await FlightModel.findByIdAndUpdate(
-            flightId,
-            { $set: { 'document.kml.coordinates': newArea[0] } }
-        )
-
+        
+        savedFlight.document.kml.coordinates = newArea.coordinates
+        
         await newKML.save()
+        await savedFlight.save()
+
+        res.status(200).json({ message: "Flight & Checklists created successfully" })
     } catch (e) {
         response.code = 500
         response.message = e.message

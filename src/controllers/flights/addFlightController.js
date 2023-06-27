@@ -94,11 +94,7 @@ const addFlightController = async (req, res, next) => {
         req.flightId = savedFlight._id
         req.savedFlight = savedFlight
 
-        await next()
-
-        await savedFlight.save()
-
-        res.status(200).json({ message: "Flight & Checklists created successfully" })
+        next()
     } catch (e) {
         res.status(500).json({ e, error: "Internal server error", detail: e.message })
     }

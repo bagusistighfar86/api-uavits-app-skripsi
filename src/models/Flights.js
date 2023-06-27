@@ -37,19 +37,6 @@ const LiveCoordinatesSchema = new mongoose.Schema({
     },
 })
 
-const CoordinatesSchema = new mongoose.Schema({
-    longitude: {
-        type: Number,
-        required: true,
-        default: 0.0
-    },
-    latitude: {
-        type: Number,
-        required: true,
-        default: 0.0
-    },
-})
-
 const KMLSchema = new mongoose.Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -61,9 +48,8 @@ const KMLSchema = new mongoose.Schema({
         default: ""
     },
     coordinates: {
-        type: [CoordinatesSchema],
+        type: Array,
         required: false,
-        default: []
     },
     kmlFile: {
         type: String,
