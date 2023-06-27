@@ -82,12 +82,19 @@ const checkGeofencingController = async (req, res) => {
       response.data.area_name = name
     }
 
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate")
+
     await FlightModel.findByIdAndUpdate(
       flightId,
-      { $push: { liveFlight: { longitude, latitude, altitude: altitude * meterToFeet, groundSpeed: groundSpeed * meterPerSecondToKnots, createdAt: new Date() } } },
+      { $push: { liveFlight: { 
+        longitude, 
+        latitude, 
+        altitude: altitude * meterToFeet, 
+        groundSpeed: groundSpeed * meterPerSecondToKnots, 
+        checkResponse: response,
+        createdAt: new Date() } } },
     )
 
-    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate")
     return res.status(200).json(response)
   } catch (e) {
     response.code = 500

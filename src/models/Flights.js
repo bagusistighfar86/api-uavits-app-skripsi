@@ -35,6 +35,30 @@ const LiveCoordinatesSchema = new mongoose.Schema({
         required: true,
         default: 0.0
     },
+    checkResponse: {
+        code: {
+            type: Number,
+            default: 200
+        },
+        message: {
+            type: String,
+            default: "-"
+        },
+        data: {
+            status: {
+                type: String,
+                default: "-"
+            },
+            message:{
+                type: String,
+                default: "-"
+            },
+            area_name:{
+                type: String,
+                default: "-"
+            }
+        },
+    },
     createdAt: {
         type: Date,
         required: false
@@ -117,7 +141,7 @@ const DetailChecklistSchema = new mongoose.Schema({
     idLanding: {
         type: String,
         required: false,
-        default:""
+        default: ""
     },
     isCompleteChecklist: {
         type: Boolean,
