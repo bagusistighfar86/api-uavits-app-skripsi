@@ -15,6 +15,7 @@ import getFlightPFRController from "../controllers/flights/getFlightPFR.js"
 import startFlightController from "../controllers/flights/startFlightController.js"
 import stopFlightController from "../controllers/flights/stopFlightController.js"
 import addKMLController from "../controllers/kml/addKMLController.js"
+import getActiveFlightController from "../controllers/flights/getActiveFlightController.js"
 
 const router = express.Router()
 const storage = multer.diskStorage({
@@ -82,6 +83,7 @@ const cpUpload = upload.fields([
 ])
 
 router.get("/", verifyToken, getFlightController)
+router.get("/active", verifyToken, getActiveFlightController)
 router.get("/search", verifyToken, searchFlightController)
 router.get("/pfr", verifyToken, getFlightPFRController)
 router.get("/:id", verifyToken, getDetailFlightController)
