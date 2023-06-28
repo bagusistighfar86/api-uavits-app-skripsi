@@ -106,7 +106,7 @@ const checkGeofencingController = async (req, res) => {
         { $push: { liveFlight: { 
           longitude, 
           latitude, 
-          altitude: altitude * meterToFeet, 
+          altitude: altitude, 
           groundSpeed: groundSpeed * meterPerSecondToKnots, 
           checkResponse: response,
           createdAt: new Date() } } },

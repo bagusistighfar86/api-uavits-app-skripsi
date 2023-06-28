@@ -15,8 +15,6 @@ const getActiveFlightController = async (req, res) => {
             }
         })
 
-        console.log(flights)
-
         if (flights.length === 0) {
             response.code = 404
             response.message = "No active flight UAV"
