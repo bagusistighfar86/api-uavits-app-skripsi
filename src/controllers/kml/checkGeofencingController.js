@@ -76,24 +76,42 @@ const checkGeofencingController = async (req, res) => {
       response.data.area_name = name
     }
 
-    if (altitude > 120.0) {
-      response.data.status = "danger"
-      response.data.message = "The flight exceeds the maximum altitude limit"
-      response.data.area_name = name
-    }
-
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate")
 
-    await FlightModel.findByIdAndUpdate(
-      flightId,
-      { $push: { liveFlight: { 
-        longitude, 
-        latitude, 
-        altitude: altitude * meterToFeet, 
-        groundSpeed: groundSpeed * meterPerSecondToKnots, 
-        checkResponse: response,
-        createdAt: new Date() } } },
-    )
+    const flight = await FlightModel.findById(flightId)
+    let firstAltitude
+
+    if (flight.liveFlight.length !== 0) {
+      firstAltitude = flight.liveFlight[0].altitude
+
+      if ((altitude - firstAltitude) * meterToFeet > 120.0) {
+        response.data.status = "safe"
+        response.data.message = "The flight exceeds the maximum altitude limit"
+        response.data.area_name = name
+      }
+
+      await FlightModel.findByIdAndUpdate(
+        flightId,
+        { $push: { liveFlight: { 
+          longitude, 
+          latitude, 
+          altitude: (altitude - firstAltitude) * meterToFeet, 
+          groundSpeed: groundSpeed * meterPerSecondToKnots, 
+          checkResponse: response,
+          createdAt: new Date() } } },
+      )
+    } else {
+      await FlightModel.findByIdAndUpdate(
+        flightId,
+        { $push: { liveFlight: { 
+          longitude, 
+          latitude, 
+          altitude: altitude * meterToFeet, 
+          groundSpeed: groundSpeed * meterPerSecondToKnots, 
+          checkResponse: response,
+          createdAt: new Date() } } },
+      )
+    }
 
     return res.status(200).json(response)
   } catch (e) {
