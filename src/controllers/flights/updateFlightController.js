@@ -14,8 +14,12 @@ const updateFlightController = async (req, res, next) => {
         const kml = req.files['kml'][0]
         const airspaceAssessment = req.files['airspaceAssessment'][0]
         const dnpPermit = req.files['dnpPermit'][0]
-        const militaryPermit = req.files['militaryPermit'][0]
-        const authorityPermit = req.files['authorityPermit'][0]
+
+        let militaryPermit
+        if (req.files['militaryPermit'])  militaryPermit = req.files['militaryPermit'][0]
+        let authorityPermit
+        if (req.files['authorityPermit'])  authorityPermit = req.files['authorityPermit'][0]
+
         const newKML = {
             name: "",
             coordinates: [],
@@ -26,8 +30,8 @@ const updateFlightController = async (req, res, next) => {
             kml: newKML,
             airspaceAssessment: airspaceAssessment.path.replace(/\\/g, '/'),
             dnpPermit: dnpPermit.path.replace(/\\/g, '/'),
-            militaryPermit: militaryPermit.path.replace(/\\/g, '/'),
-            authorityPermit: authorityPermit.path.replace(/\\/g, '/'),
+            militaryPermit: militaryPermit?.path?.replace(/\\/g, '/') || "",
+            authorityPermit: authorityPermit?.path?.replace(/\\/g, '/') || "",
         }
     
         const updatedData = {
@@ -55,10 +59,15 @@ const updateFlightController = async (req, res, next) => {
         const __filename = fileURLToPath(import.meta.url)
         const __dirname = dirname(__filename)
         const assetsDirectory = join(__dirname, '../../../')
+
         fs.unlinkSync(join(assetsDirectory, lastFlight.document.kml.kmlFile))
         fs.unlinkSync(join(assetsDirectory, lastFlight.document.airspaceAssessment))
         fs.unlinkSync(join(assetsDirectory, lastFlight.document.dnpPermit))
+        
+        if (lastFlight.document.militaryPermit)
         fs.unlinkSync(join(assetsDirectory, lastFlight.document.militaryPermit))
+
+        if (lastFlight.document.authorityPermit)
         fs.unlinkSync(join(assetsDirectory, lastFlight.document.authorityPermit))
 
 
