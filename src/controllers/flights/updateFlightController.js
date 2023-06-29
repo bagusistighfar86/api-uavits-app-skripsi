@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url'
 import path, { dirname, join } from 'path'
 import { FlightModel } from "../../models/Flights.js"
 
-const updateFlightController = async (req, res) => {
+const updateFlightController = async (req, res, next) => {
     try {
         const { id } = req.params
         const { flightDate, takeOffPoint, landingPoint } = req.body
@@ -66,7 +66,11 @@ const updateFlightController = async (req, res) => {
             return res.status(404).json({ error: 'Flight not found' })
         }
 
-        return res.status(200).json({ message: "Flight updated succesfull", lastFlight })
+        req.kmlFile = kml
+        req.flightId = id
+        req.savedFlight = lastFlight
+
+        next()
     } catch (e) {
         res.status(500).json({ error: "Internal server error", detail: e.message })
     }

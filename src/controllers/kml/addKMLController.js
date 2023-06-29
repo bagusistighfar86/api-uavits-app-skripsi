@@ -47,7 +47,7 @@ const addKMLController = async (req, res) => {
         
         await newKML.save()
         await savedFlight.save()
-
+        
         res.status(200).json({ message: "Flight & Checklists created successfully" })
     } catch (e) {
         response.code = 500
