@@ -1,6 +1,11 @@
 import { FlightModel } from "../../models/Flights.js"
 
 const getDetailFlightController = async (req, res) => {
+    let response = {
+        code: 200,
+        message: "",
+        data: {},
+    }
     try {
         const { id } = req.params
         const flight = await FlightModel.findOne({
@@ -11,12 +16,21 @@ const getDetailFlightController = async (req, res) => {
             }
         })
         if (!flight) {
-            return res.status(404).json({ error: 'Flight not found' })
+            response.code = 404
+            response.message = "Flight not found"
+            response.data = {}
+            return res.status(404).json(response)
         }
 
-        return res.status(200).json(flight)
-    } catch (error) {
-        res.status(500).json({ error: "Internal server error", detail: error.message })
+        response.code = 200
+        response.message = "Get flight successfull"
+        response.data = { flight }
+        return res.status(200).json(response)
+    } catch (e) {
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 
