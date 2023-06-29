@@ -84,7 +84,7 @@ const cpUpload = upload.fields([
 
 router.get("/", verifyToken, getFlightController)
 router.get("/active", verifyToken, getActiveFlightController)
-router.get("/search", verifyToken, searchFlightController)
+router.post("/search", verifyToken, searchFlightController)
 router.get("/pfr", verifyToken, getFlightPFRController)
 router.get("/:id", verifyToken, getDetailFlightController)
 router.post("/", verifyToken, cpUpload, addFlightController, addKMLController)

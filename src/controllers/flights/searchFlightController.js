@@ -45,7 +45,10 @@ const searchFlightController = async (req, res) => {
             response.data = { flights }
             return res.status(200).json(response)
         } else {
-            return res.status(400).json({ error: 'Invalid request' })
+            response.code = 400
+            response.message = "Invalid request"
+            response.data = {}
+            return res.status(400).json(response)
         }
     } catch (e) {
         response.code = 500
