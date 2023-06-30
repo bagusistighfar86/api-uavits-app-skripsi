@@ -13,7 +13,6 @@ const addKMLController = async (req, res) => {
 
         const DOMParser = xmldom.DOMParser;
     
-        // const kmlFile = req.files['kml'][0]
         const flightId = req.flightId
         const savedFlight = req.savedFlight
         
@@ -47,8 +46,11 @@ const addKMLController = async (req, res) => {
         
         await newKML.save()
         await savedFlight.save()
-        
-        res.status(200).json({ message: "Flight & Checklists created successfully" })
+
+        response.code = 200
+        response.message = "Flight & Checklists created successfully"
+        response.data = {}
+        return res.status(200).json(response)
     } catch (e) {
         response.code = 500
         response.message = e.message

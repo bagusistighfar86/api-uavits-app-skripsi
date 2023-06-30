@@ -2,6 +2,11 @@ import { FlightModel } from "../../models/Flights.js"
 import addChecklistController from "../checklogs/addChecklistController.js"
 
 const addFlightController = async (req, res, next) => {
+    let response = {
+        code: 200,
+        message: "",
+        data: {},
+    }
     try {
         const { flightDate, takeOffPoint, landingPoint } = req.body
 
@@ -96,7 +101,10 @@ const addFlightController = async (req, res, next) => {
 
         next()
     } catch (e) {
-        res.status(500).json({ e, error: "Internal server error", detail: e.message })
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 
