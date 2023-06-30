@@ -7,19 +7,17 @@ const verifyFlightController = async (req, res) => {
         message: "",
         data: {},
     }
-    
+
     try {
         const { id } = req.params
         const { statusVerification, noteVerification } = req.body
 
         const updatedData = {
-            $set: {
-                statusVerification,
-                noteVerification,
-                isNeedSubmit: false,
-                isNeedVerified: false,
-                updatedAt: new Date()
-            },
+            statusVerification,
+            noteVerification,
+            isNeedSubmit: false,
+            isNeedVerified: false,
+            updatedAt: new Date()
         }
 
         const flight = await FlightModel.findByIdAndUpdate(
