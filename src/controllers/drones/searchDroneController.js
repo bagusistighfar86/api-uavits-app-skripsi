@@ -1,6 +1,11 @@
 import { DroneModel } from "../../models/Drones.js"
 
 const searchDroneController = async (req, res) => {
+    let response = {
+        code: 200,
+        message: "",
+        data: {},
+    }
     try {
         const search = req.query.search || ""
         const category = req.body.category
@@ -37,16 +42,27 @@ const searchDroneController = async (req, res) => {
             drones = await DroneModel.find(query)
 
             if (drones.length === 0) {
-                return res.status(404).json({ error: 'No drones found' })
+                response.code = 404
+                response.message = "No drones found"
+                response.data = {}
+                return res.status(404).json(response)
             }
 
-            return res.json(drones)
+            response.code = 200
+            response.message = "Search drone data successfull"
+            response.data = { drones }
+            return res.status(200).json(response)
         } else {
-
-            return res.status(400).json({ error: 'Invalid request' })
+            response.code = 400
+            response.message = "Invalid request"
+            response.data = {}
+            return res.status(400).json(response)
         }
     } catch (e) {
-        res.status(500).json({ e, error: 'Internal server error', detail: e.message })
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 
