@@ -67,6 +67,7 @@ const updateFlightController = async (req, res, next) => {
             landingPoint,
             pilot,
             isNeedSubmit: true,
+            isNeedVerified: false,
             updatedAt: new Date()
         }
 
