@@ -14,6 +14,9 @@ const updateFlightController = async (req, res, next) => {
         const { id } = req.params
         const { flightDate, takeOffPoint, landingPoint } = req.body
 
+        const detailDrone = JSON.parse(req.body.detailDrone)
+        const pilot = JSON.parse(req.body.pilot)
+
         const lastFlight = await FlightModel.findById({
             _id: id,
             auth: {
@@ -22,31 +25,18 @@ const updateFlightController = async (req, res, next) => {
             }
         })
 
-        const __filename = fileURLToPath(import.meta.url)
-        const __dirname = dirname(__filename)
-        const assetsDirectory = join(__dirname, '../../../')
-
-        fs.unlinkSync(join(assetsDirectory, lastFlight.document.kml.kmlFile))
-        fs.unlinkSync(join(assetsDirectory, lastFlight.document.airspaceAssessment))
-        fs.unlinkSync(join(assetsDirectory, lastFlight.document.dnpPermit))
-
-        if (lastFlight.document.militaryPermit)
-            fs.unlinkSync(join(assetsDirectory, lastFlight.document.militaryPermit))
-
-        if (lastFlight.document.authorityPermit)
-            fs.unlinkSync(join(assetsDirectory, lastFlight.document.authorityPermit))
-
-        const detailDrone = JSON.parse(req.body.detailDrone)
-        const pilot = JSON.parse(req.body.pilot)
-
         let kml = lastFlight.document.kml.kmlFile
-        if (req.files['kml']) req.files['kml'][0]
+        if (req.files['kml']) kml = req.files['kml'][0]
+
         let airspaceAssessment = lastFlight.document.airspaceAssessment
-        if (req.files['airspaceAssessment']) req.files['airspaceAssessment'][0]
+        if (req.files['airspaceAssessment']) airspaceAssessment = req.files['airspaceAssessment'][0]
+
         let dnpPermit = lastFlight.document.dnpPermit
-        if (req.files['dnpPermit']) req.files['dnpPermit'][0]
+        if (req.files['dnpPermit']) dnpPermit = req.files['dnpPermit'][0]
+
         let militaryPermit = lastFlight.document.militaryPermit
         if (req.files['militaryPermit']) militaryPermit = req.files['militaryPermit'][0]
+
         let authorityPermit = lastFlight.document.authorityPermit
         if (req.files['authorityPermit']) authorityPermit = req.files['authorityPermit'][0]
 
@@ -103,6 +93,27 @@ const updateFlightController = async (req, res, next) => {
             response.data = {}
             return res.status(404).json(response)
         }
+
+        const __filename = fileURLToPath(import.meta.url)
+        const __dirname = dirname(__filename)
+        const assetsDirectory = join(__dirname, '../../../')
+
+        if (kml !== lastFlight.document.kml.kmlFile)
+            fs.unlinkSync(join(assetsDirectory, lastFlight.document.kml.kmlFile))
+
+        if (airspaceAssessment !== lastFlight.document.airspaceAssessment)
+            fs.unlinkSync(join(assetsDirectory, lastFlight.document.airspaceAssessment))
+
+        if (dnpPermit !== lastFlight.document.dnpPermit)
+            fs.unlinkSync(join(assetsDirectory, lastFlight.document.dnpPermit))
+
+        if (lastFlight.document.militaryPermit !== null && 
+            militaryPermit !== lastFlight.document.militaryPermit)
+            fs.unlinkSync(join(assetsDirectory, lastFlight.document.militaryPermit))
+
+        if (lastFlight.document.authorityPermit !== null && 
+            authorityPermit !== lastFlight.document.authorityPermit)
+            fs.unlinkSync(join(assetsDirectory, lastFlight.document.authorityPermit))
 
         req.kmlFile = kml
         req.flightId = id

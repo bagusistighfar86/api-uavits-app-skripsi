@@ -16,8 +16,13 @@ const addFlightController = async (req, res, next) => {
         const kml = req.files['kml'][0]
         const airspaceAssessment = req.files['airspaceAssessment'][0]
         const dnpPermit = req.files['dnpPermit'][0]
-        const militaryPermit = req.files['militaryPermit'][0]
-        const authorityPermit = req.files['authorityPermit'][0]
+        
+        let militaryPermit
+        if (req.files['militaryPermit']) militaryPermit = req.files['militaryPermit'][0]
+
+        let authorityPermit
+        if (req.files['authorityPermit']) authorityPermit = req.files['authorityPermit'][0]
+        
         const newKML = {
             name: "",
             coordinates: [],
@@ -28,8 +33,8 @@ const addFlightController = async (req, res, next) => {
             kml: newKML,
             airspaceAssessment: airspaceAssessment.path.replace(/\\/g, '/'),
             dnpPermit: dnpPermit.path.replace(/\\/g, '/'),
-            militaryPermit: militaryPermit.path.replace(/\\/g, '/'),
-            authorityPermit: authorityPermit.path.replace(/\\/g, '/'),
+            militaryPermit: militaryPermit ? militaryPermit.path.replace(/\\/g, '/') : "",
+            authorityPermit: authorityPermit ? authorityPermit.path.replace(/\\/g, '/') : "" ,
         }
 
         const newFlight = new FlightModel({
