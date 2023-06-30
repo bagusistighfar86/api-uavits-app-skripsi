@@ -1,6 +1,11 @@
 import { DroneModel } from "../../models/Drones.js"
 
 const removeOneDroneController = async (req, res) => {
+    let response = {
+        code: 200,
+        message: "",
+        data: {},
+    }
     try {
         const { id } = req.params
         const drone = await DroneModel.findOneAndRemove({
@@ -11,12 +16,21 @@ const removeOneDroneController = async (req, res) => {
             }
         })
         if (!drone) {
-            return res.status(404).json({ error: 'Drone not found' })
+            response.code = 404
+            response.message = "No data found"
+            response.data = {}
+            return res.status(404).json(response)
         }
 
-        return res.status(200).json({message: "Drone deleted succesfull"})
-    } catch (error) {
-        res.status(500).json({ error: "Internal server error", detail: error.message })
+        response.code = 200
+        response.message = "Drone deleted succesfull"
+        response.data = {}
+        return res.status(200).json(response)
+    } catch (e) {
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        res.status(500).json(response)
     }
 }
 
