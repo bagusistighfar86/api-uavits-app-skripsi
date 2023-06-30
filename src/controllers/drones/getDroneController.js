@@ -14,6 +14,13 @@ const getDroneController = async (req, res) => {
             }
         })
 
+        if (!drones) {
+            response.code = 404
+            response.message = "No data found"
+            response.data = {}
+            return res.status(404).json(response)
+        }
+
         response.code = 200
         response.message = e.message
         response.data = { drones }
