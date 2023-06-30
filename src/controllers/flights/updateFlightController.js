@@ -71,8 +71,6 @@ const updateFlightController = async (req, res, next) => {
             updatedAt: new Date()
         }
 
-        console.log(updatedData)
-
         const newFlight = await FlightModel.findOneAndUpdate(
             {
                 _id: id,
