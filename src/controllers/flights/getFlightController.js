@@ -22,7 +22,7 @@ const getFlightController = async (req, res) => {
         }
 
         response.code = 200
-        response.message = "Get flight data successfull"
+        response.message = "Get flights data successfull"
         response.data = { flights }
         return res.status(200).json(response)
     } catch (e) {

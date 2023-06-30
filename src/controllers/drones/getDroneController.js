@@ -22,7 +22,7 @@ const getDroneController = async (req, res) => {
         }
 
         response.code = 200
-        response.message = e.message
+        response.message = "Get drones data successfull"
         response.data = { drones }
         return res.status(200).json(response)
     } catch (e) {
