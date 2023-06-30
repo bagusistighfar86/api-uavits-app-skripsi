@@ -14,7 +14,7 @@ const getFlightController = async (req, res) => {
             }
         })
 
-        if (!flights) {
+        if (flights.length === 0) {
             response.code = 404
             response.message = "No data found"
             response.data = {}
