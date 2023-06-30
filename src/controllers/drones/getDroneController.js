@@ -1,6 +1,11 @@
 import { DroneModel } from "../../models/Drones.js"
 
 const getDroneController = async (req, res) => {
+    let response = {
+        code: 200,
+        message: "",
+        data: {},
+    }
     try {
         const drones = await DroneModel.find({
             auth: {
@@ -9,9 +14,15 @@ const getDroneController = async (req, res) => {
             }
         })
 
-        return res.status(200).json(drones)
+        response.code = 200
+        response.message = e.message
+        response.data = { drones }
+        return res.status(200).json(response)
     } catch (e) {
-        res.status(500).json({ e, error: "Internal server error", detail: e.message })
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 
