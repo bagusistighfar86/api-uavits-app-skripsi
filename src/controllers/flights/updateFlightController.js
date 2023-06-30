@@ -42,11 +42,7 @@ const updateFlightController = async (req, res, next) => {
 
         let newKML
         if (kml === lastFlight.document.kml.kmlFile) {
-            newKML = {
-                name: lastFlight.document.kml.name,
-                coordinates: lastFlight.document.kml.coordinates,
-                kmlFile: kml
-            }
+            newKML = lastFlight.document.kml
         } else {
             newKML = {
                 name: "",
@@ -74,6 +70,8 @@ const updateFlightController = async (req, res, next) => {
             updatedAt: new Date()
         }
 
+        console.log(updatedData)
+
         const newFlight = await FlightModel.findOneAndUpdate(
             {
                 _id: id,
@@ -85,7 +83,6 @@ const updateFlightController = async (req, res, next) => {
             updatedData,
             { new: true }
         )
-
 
         if (!newFlight) {
             response.code = 404
@@ -107,11 +104,11 @@ const updateFlightController = async (req, res, next) => {
         if (dnpPermit !== lastFlight.document.dnpPermit)
             fs.unlinkSync(join(assetsDirectory, lastFlight.document.dnpPermit))
 
-        if (lastFlight.document.militaryPermit !== null && 
+        if (lastFlight.document.militaryPermit !== null &&
             militaryPermit !== lastFlight.document.militaryPermit)
             fs.unlinkSync(join(assetsDirectory, lastFlight.document.militaryPermit))
 
-        if (lastFlight.document.authorityPermit !== null && 
+        if (lastFlight.document.authorityPermit !== null &&
             authorityPermit !== lastFlight.document.authorityPermit)
             fs.unlinkSync(join(assetsDirectory, lastFlight.document.authorityPermit))
 
@@ -119,7 +116,13 @@ const updateFlightController = async (req, res, next) => {
         req.flightId = id
         req.savedFlight = newFlight
 
-        next()
+        if (kml !== lastFlight.document.kml.kmlFile) next()
+        else {
+            response.code = 200
+            response.message = "Flight data successfully update"
+            response.data = { flight: newFlight }
+            return res.status(200).json(response)
+        }
     } catch (e) {
         response.code = 500
         response.message = e.message

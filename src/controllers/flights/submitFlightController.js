@@ -4,12 +4,10 @@ const submitFlightController = async (req, res) => {
     try {
         const { id } = req.params
         const updatedData = {
-            $set: {
-                statusVerification: "waiting",
-                isNeedSubmit: false,
-                isNeedVerified: true,
-                updatedAt: new Date()
-            },
+            statusVerification: "waiting",
+            isNeedSubmit: false,
+            isNeedVerified: true,
+            updatedAt: new Date()
         }
 
         const flight = await FlightModel.findOneAndUpdate(
@@ -22,7 +20,7 @@ const submitFlightController = async (req, res) => {
             },
             updatedData,
             { new: true }
-          )
+        )
         if (!flight) {
             return res.status(404).json({ error: 'Flight not found' })
         }

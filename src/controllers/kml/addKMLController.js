@@ -49,7 +49,7 @@ const addKMLController = async (req, res) => {
 
         response.code = 200
         response.message = "Flight & Checklists created successfully"
-        response.data = {}
+        response.data = { flight: savedFlight }
         return res.status(200).json(response)
     } catch (e) {
         response.code = 500
