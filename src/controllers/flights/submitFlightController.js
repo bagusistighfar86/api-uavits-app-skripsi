@@ -1,13 +1,21 @@
 import { FlightModel } from "../../models/Flights.js"
 
 const submitFlightController = async (req, res) => {
+    let response = {
+        code: 200,
+        message: "",
+        data: {},
+    }
+
     try {
         const { id } = req.params
         const updatedData = {
-            statusVerification: "waiting",
-            isNeedSubmit: false,
-            isNeedVerified: true,
-            updatedAt: new Date()
+            $set: {
+                statusVerification: "waiting",
+                isNeedSubmit: false,
+                isNeedVerified: true,
+                updatedAt: new Date()
+            },
         }
 
         const flight = await FlightModel.findOneAndUpdate(
@@ -22,12 +30,21 @@ const submitFlightController = async (req, res) => {
             { new: true }
         )
         if (!flight) {
-            return res.status(404).json({ error: 'Flight not found' })
+            response.code = 404
+            response.message = "Flight not found"
+            response.data = {}
+            return res.status(404).json(response)
         }
 
-        return res.status(200).json({ message: "Flight has been submitted", flight })
-    } catch (error) {
-        res.status(500).json({ error: "Internal server error", detail: error.message })
+        response.code = 200
+        response.message = "Flight has been submitted"
+        response.data = {}
+        return res.status(200).json(response)
+    } catch (e) {
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 
