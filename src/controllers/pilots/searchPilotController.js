@@ -21,10 +21,6 @@ const searchPilotController = async (req, res) => {
         if (category && category.length > 0 && search) {
             const searchOptions = []
 
-            if (category.includes('id')) {
-                searchOptions.push({ _id: { $regex: search, $options: 'i' } })
-            }
-
             if (category.includes('name')) {
                 searchOptions.push({ name: { $regex: search, $options: 'i' } })
             }
