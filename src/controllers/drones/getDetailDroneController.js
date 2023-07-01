@@ -1,6 +1,11 @@
 import { DroneModel } from "../../models/Drones.js"
 
 const getDetailDroneController = async (req, res) => {
+    let response = {
+        code: 200,
+        message: "",
+        data: {},
+    }
     try {
         const { id } = req.params
         const drone = await DroneModel.findOne({
@@ -11,12 +16,21 @@ const getDetailDroneController = async (req, res) => {
             }
         })
         if (!drone) {
-            return res.status(404).json({ error: 'Drone not found' })
+            response.code = 404
+            response.message = "Drone not found"
+            response.data = {}
+            return res.status(404).json(response)
         }
 
-        return res.status(200).json(drone)
-    } catch (error) {
-        res.status(500).json({ error: "Internal server error", detail: error.message })
+        response.code = 200
+        response.message = "Get drone successfull"
+        response.data = { drone }
+        return res.status(200).json(response)
+    } catch (e) {
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 
