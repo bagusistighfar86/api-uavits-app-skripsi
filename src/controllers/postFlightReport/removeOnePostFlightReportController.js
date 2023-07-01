@@ -31,6 +31,7 @@ const removeOnePostFlightReportController = async (req, res) => {
         response.message = e.message
         response.data = {}
         return res.status(500).json(response)
+    }
 }
 
 export default removeOnePostFlightReportController

@@ -2,6 +2,11 @@ import { FlightModel } from "../../models/Flights.js"
 import { PostFlightReportModel } from "../../models/PostFlightReports.js"
 
 const addPostFlightReportController = async (req, res) => {
+    let response = {
+        code: 200,
+        message: "",
+        data: {},
+    }
     try {
         const pfrDetail = JSON.parse(req.body.pfrDetail)
         const flightDetail = JSON.parse(req.body.flightDetail)
@@ -13,11 +18,17 @@ const addPostFlightReportController = async (req, res) => {
         })
 
         if (pfr) {
-            return res.status(400).json({ error: "Post flight report already created before" })
+            response.code = 400
+            response.message = "Post flight report already registered"
+            response.data = {}
+            return res.status(400).json(response)
         }
 
         if (!flightDetail || !flightDetail.id) {
-            return res.status(400).json({ error: "Invalid flight details" })
+            response.code = 400
+            response.message = "Invalid flight details"
+            response.data = {}
+            return res.status(400).json(response)
         }
 
         const newDocument = {
@@ -49,9 +60,15 @@ const addPostFlightReportController = async (req, res) => {
         
         await newPFR.save()
 
-        res.status(200).json({ message: "Post flight report created successfully" })
+        response.code = 200
+        response.message = "Post flight report created successfully"
+        response.data = {}
+        return res.status(200).json(response)
     } catch (e) {
-        res.status(500).json({ error: "Internal server error", detail: e.message })
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 
