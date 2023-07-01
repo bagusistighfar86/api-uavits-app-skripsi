@@ -75,7 +75,7 @@ const cpUpload = upload.fields([
 ])
 
 router.get("/", verifyToken, getDroneController)
-router.get("/search", verifyToken, searchDroneController)
+router.post("/search", verifyToken, searchDroneController)
 router.get("/:id", verifyToken, getDetailDroneController)
 router.post("/", verifyToken, cpUpload, addDroneController)
 router.delete("/:id", verifyToken, removeOneDroneController)
