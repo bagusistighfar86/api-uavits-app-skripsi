@@ -1,6 +1,11 @@
 import { DroneModel } from "../../models/Drones.js"
 
 const addDroneController = async (req, res) => {
+    let response = {
+        code: 200,
+        message: "",
+        data: {},
+    }
     try {
         const { name, serialNumber, expiredDate } = req.body
 
@@ -21,7 +26,10 @@ const addDroneController = async (req, res) => {
         })
 
         if (drone) {
-            return res.status(400).json({ error: "Drone already registered" })
+            response.code = 400
+            response.message = "Drone already registered"
+            response.data = {}
+            return res.status(400).json(response)
         }
 
         const newDocument = {
@@ -47,9 +55,15 @@ const addDroneController = async (req, res) => {
 
         await newDrone.save()
 
-        res.status(200).json({ message: "Drone created successfully" })
+        response.code = 200
+        response.message = "Drone created successfully"
+        response.data = {}
+        return res.status(200).json(response)
     } catch (e) {
-        res.status(500).json({ e, error: "Internal server error", detail: e.message })
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 
