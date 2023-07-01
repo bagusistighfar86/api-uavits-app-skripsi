@@ -1,6 +1,11 @@
 import { PostFlightReportModel } from "../../models/PostFlightReports.js"
 
 const getDetailPostFlightReportController = async (req, res) => {
+    let response = {
+        code: 200,
+        message: "",
+        data: {},
+    }
     try {
         const { id } = req.params
         const pfr = await PostFlightReportModel.findOne({
@@ -11,12 +16,21 @@ const getDetailPostFlightReportController = async (req, res) => {
             }
         })
         if (!pfr) {
-            return res.status(404).json({ error: 'PostFlightReport not found' })
+            response.code = 404
+            response.message = "No data found"
+            response.data = {}
+            return res.status(404).json(response)
         }
 
-        return res.status(200).json(pfr)
-    } catch (error) {
-        res.status(500).json({ error: "Internal server error", detail: error.message })
+        response.code = 200
+        response.message = "Get post flight report successfull"
+        response.data = { drone }
+        return res.status(200).json(response)
+    } catch (e) {
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        res.status(500).json(response)
     }
 }
 
