@@ -47,7 +47,7 @@ const cpUpload = upload.fields([
 ])
 
 router.get("/", verifyToken, getPostFlightReportController)
-router.get("/search", verifyToken, searchPostFlightReportController)
+router.post("/search", verifyToken, searchPostFlightReportController)
 router.get("/:id", verifyToken, getDetailPostFlightReportController)
 router.post("/", verifyToken, cpUpload, addPostFlightReportController)
 router.delete("/:id", verifyToken, removeOnePostFlightReportController)
