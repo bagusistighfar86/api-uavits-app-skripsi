@@ -1,5 +1,6 @@
 import { FlightModel } from "../../models/Flights.js"
 import { PostFlightReportModel } from "../../models/PostFlightReports.js"
+import { UserModel } from "../../models/Users.js"
 
 const addPostFlightReportController = async (req, res) => {
     let response = {
@@ -9,24 +10,51 @@ const addPostFlightReportController = async (req, res) => {
     }
     try {
         const pfrDetail = JSON.parse(req.body.pfrDetail)
-        const flightDetail = JSON.parse(req.body.flightDetail)
-        const userDetail = JSON.parse(req.body.userDetail)
+
+        const flightId = req.body.flightId
+
+        const flight = FlightModel.findById(flightId)
+
+        const flightDetail = {
+            id: flightId,
+            flightDate: flight.flightDate,
+            departure: flight?.departure ? flight?.departure : "",
+            arrival: flight?.arrival ? flight?.arrival : "",
+            pilot: flight.pilot
+        }
+
+        if (!flight) {
+            response.code = 404
+            response.message = "No flight data"
+            response.data = {}
+            return res.status(404).json(response)
+        }
+
+        flight.completeFlightStatus = pfrDetail?.isSafeFlight ? "success" : "failed"
+        await flight.save()
+        
+        const user = UserModel.findById(flight.auth.userId)
+
+        if (!user) {
+            response.code = 404
+            response.message = "No user data"
+            response.data = {}
+            return res.status(404).json(response)
+        }
+
+        const userDetail = {
+            operatorName: user.name,
+            operatorEmail: user.email
+        }
     
         const notam = req.files['notam'][0]
         const pfr = await PostFlightReportModel.findOne({
-            'flightDetail.id': flightDetail?.id
+            'flightDetail.id': flightId
         })
 
         if (pfr) {
             response.code = 400
             response.message = "Post flight report already registered"
-            response.data = {}
-            return res.status(400).json(response)
-        }
-
-        if (!flightDetail || !flightDetail.id) {
-            response.code = 400
-            response.message = "Invalid flight details"
             response.data = {}
             return res.status(400).json(response)
         }
@@ -46,18 +74,6 @@ const addPostFlightReportController = async (req, res) => {
             }
         })
 
-        await FlightModel.findByIdAndUpdate(
-            flightDetail?.id,
-            {
-                $set: {
-                    departure: flightDetail?.departure,
-                    arrival: flightDetail?.arrival,
-                    completeFlightStatus: pfrDetail?.isSafeFlight ? "success" : "failed"
-                }
-            },
-            { new: true }
-        )
-        
         await newPFR.save()
 
         response.code = 200
