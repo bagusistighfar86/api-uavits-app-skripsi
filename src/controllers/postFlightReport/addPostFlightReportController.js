@@ -13,7 +13,7 @@ const addPostFlightReportController = async (req, res) => {
 
         const flightId = req.body.flightId
 
-        const flight = FlightModel.findById(flightId)
+        const flight = await FlightModel.findById(flightId).exec()
 
         const flightDetail = {
             id: flightId,
@@ -33,7 +33,7 @@ const addPostFlightReportController = async (req, res) => {
         flight.completeFlightStatus = pfrDetail?.isSafeFlight ? "success" : "failed"
         await flight.save()
         
-        const user = UserModel.findById(flight.auth.userId)
+        const user = await UserModel.findById(flight.auth.userId).exec
 
         if (!user) {
             response.code = 404
