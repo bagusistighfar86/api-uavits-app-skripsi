@@ -1,5 +1,6 @@
 import { DroneModel } from "../../models/Drones.js"
 import dangerArea from "../../data/dangerArea.json" assert { type: "json" }
+import { DangerAreaModel } from "../../models/DangerArea.js"
 
 const addDangerAreaController = async (req, res) => {
     let response = {
@@ -24,7 +25,7 @@ const addDangerAreaController = async (req, res) => {
             newDangerAreas.push(newArea)
         });
 
-        await areas.save()
+        await DangerAreaModel.create(newDangerAreas)
 
         response.code = 200
         response.message = "Danger area created successfully"
