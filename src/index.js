@@ -12,6 +12,7 @@ import { historyRouter } from "./routes/histories.js"
 import { checklistRouter } from "./routes/checklists.js"
 import { contactRouter } from "./routes/contacts.js"
 import { kmlRouter } from "./routes/kml.js"
+import { dangerAreaRouter } from "./routes/dangerArea.js"
 
 const app = express()
 app.use(express.json())
@@ -27,6 +28,7 @@ app.use("/histories", historyRouter)
 app.use("/checklists", checklistRouter)
 app.use("/contacts", contactRouter)
 app.use("/kml", kmlRouter)
+app.use("/danger-area", dangerAreaRouter)
 
 app.use('/assets', express.static('assets'))
 
