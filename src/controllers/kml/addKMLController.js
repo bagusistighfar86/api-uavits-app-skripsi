@@ -23,7 +23,7 @@ const addKMLController = async (req, res) => {
 
         let key
         let newArea = {}
-        for (var i = 0 i < geojson.features.length i++) {
+        for (var i = 0; i < geojson.features.length; i++) {
             if (item[i].geometry) {
                 if (item[i].geometry.type.toLowerCase() === "polygon") {
                     key = item[i]?.properties?.name || ""

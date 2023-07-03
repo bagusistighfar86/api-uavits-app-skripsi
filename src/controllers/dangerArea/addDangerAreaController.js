@@ -1,5 +1,3 @@
-import { DroneModel } from "../../models/Drones.js"
-import dangerArea from "../../data/dangerArea.json" assert { type: "json" }
 import { DangerAreaModel } from "../../models/DangerArea.js"
 
 const addDangerAreaController = async (req, res) => {
@@ -9,6 +7,7 @@ const addDangerAreaController = async (req, res) => {
         data: {},
     }
     try {
+        const dangerArea = require("../../data/dangerArea.json")
         const areas = dangerArea
         let newDangerAreas = []
 
