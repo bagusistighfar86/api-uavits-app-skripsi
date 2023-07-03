@@ -1,5 +1,5 @@
 import { DroneModel } from "../../models/Drones.js"
-import dangerArea from "../../data/dangerArea.json"
+import dangerArea from "../../data/dangerArea.json" assert { type: "json" }
 
 const addDangerAreaController = async (req, res) => {
     let response = {
