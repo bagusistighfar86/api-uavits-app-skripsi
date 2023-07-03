@@ -40,8 +40,8 @@ const checkZoneController = async (req, res) => {
     return res.status(200).json(response)
   } catch (e) {
     response.code = 500
-    response.data.status = "error"
-    response.data.message = e.message
+    response.status = "error"
+    response.message = e.message
     res.status(500).json(response)
   }
 }
