@@ -6,6 +6,7 @@ const checkZoneController = async (req, res) => {
     code: 200,
     status: "",
     message: "",
+    data: {}
   }
 
   try {
@@ -30,6 +31,7 @@ const checkZoneController = async (req, res) => {
         response.code = 200
         response.status = "danger"
         response.message = "Flight need permission"
+        response.data = { area }
         return res.status(200).json(response)
       }
     }
@@ -37,11 +39,13 @@ const checkZoneController = async (req, res) => {
     response.code = 200
     response.status = "safe"
     response.message = "Flight doesn't need permission"
+    response.data = {}
     return res.status(200).json(response)
   } catch (e) {
     response.code = 500
     response.status = "error"
     response.message = e.message
+    response.data = {}
     res.status(500).json(response)
   }
 }
