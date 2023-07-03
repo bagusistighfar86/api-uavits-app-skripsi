@@ -1,15 +1,15 @@
-import { DangerAreaModel } from "../../models/DangerArea.js"
+import { KMLModel } from "../../models/KML.js"
 
-const getDangerAreaController = async (req, res) => {
+const getKMLController = async (req, res) => {
     let response = {
         code: 200,
         message: "",
         data: {},
     }
     try {
-        const area = await DangerAreaModel.find()
+        const kml = await KMLModel.find()
 
-        if (area.length === 0) {
+        if (kml.length === 0) {
             response.code = 404
             response.message = "No data found"
             response.data = {}
@@ -17,8 +17,8 @@ const getDangerAreaController = async (req, res) => {
         }
 
         response.code = 200
-        response.message = "Get danger area data successfull"
-        response.data = { dangerArea: area }
+        response.message = "Get kml data successfull"
+        response.data = { kml }
         return res.status(200).json(response)
     } catch (e) {
         response.code = 500
@@ -28,4 +28,4 @@ const getDangerAreaController = async (req, res) => {
     }
 }
 
-export default getDangerAreaController
+export default getKMLController
