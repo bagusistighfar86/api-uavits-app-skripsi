@@ -12,13 +12,14 @@ const checkZoneController = async (req, res) => {
   try {
     const { latitude, longitude } = req.body
 
-    const isPointInsideCircle = (circleCenter, circleRadius) => {
+    const isPointInsideCircle = (circleCenter, circleRadiusInMeter) => {
       const pointGeoJSON = turf.point([longitude, latitude])
-      var options = { steps: 64, units: 'meters' };
+      const circleRadiusInKilometers = circleRadiusInMeter / 1000;
+      var options = { steps: 64, units: 'kilometers' };
 
       const circleGeoJSON = turf.circle(
         [circleCenter.longitude, circleCenter.latitude],
-        circleRadius,
+        circleRadiusInKilometers,
         options
       )
 
