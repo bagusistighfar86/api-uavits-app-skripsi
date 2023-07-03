@@ -1,4 +1,4 @@
-import { DangerAreaModel } from "../../models/DangerArea"
+import { DangerAreaModel } from "../../models/DangerArea.js"
 
 const getDangerAreaController = async (req, res) => {
     let response = {
