@@ -25,7 +25,7 @@ const checkZoneController = async (req, res) => {
     for (const area of areas) {
       const circleCenter = area.coordinates
       const circleRadius = area.radius
-      const isInside = isPointInsideCircle(point, circleCenter, circleRadius)
+      const isInside = isPointInsideCircle(circleCenter, circleRadius)
       if (isInside) {
         response.code = 200
         response.status = "danger"
