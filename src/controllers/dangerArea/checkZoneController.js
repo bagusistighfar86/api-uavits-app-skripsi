@@ -14,9 +14,12 @@ const checkZoneController = async (req, res) => {
 
     const isPointInsideCircle = (circleCenter, circleRadius) => {
       const pointGeoJSON = turf.point([longitude, latitude])
+      var options = { steps: 64, units: 'meters' };
+
       const circleGeoJSON = turf.circle(
         [circleCenter.longitude, circleCenter.latitude],
-        circleRadius
+        circleRadius,
+        options
       )
 
       return turf.booleanPointInPolygon(pointGeoJSON, circleGeoJSON)
