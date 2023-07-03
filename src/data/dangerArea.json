@@ -1,0 +1,324 @@
+[
+  {
+    "nama": "Pangkalan Marinir Surabaya",
+    "latitude": -7.283912856,
+    "longitude": 112.7358013,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Pangkalan Militer TNI AL",
+    "latitude": -7.201713009,
+    "longitude": 112.7422793,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Dinas Persandian Daerah Militer V/ Brawijaya",
+    "latitude": -7.296805719,
+    "longitude": 112.7264124,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Denpom V/4",
+    "latitude": -7.296198277,
+    "longitude": 112.7305244,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Polisi Militer Daerah Militer V/Brawijaya",
+    "latitude": -7.296756999,
+    "longitude": 112.7253666,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Markas Besar D4A",
+    "latitude": -7.28624928,
+    "longitude": 112.8102665,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Mako Lantamal V Surabaya",
+    "latitude": -7.212771009,
+    "longitude": 112.7255498,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "DENKOMLEKSTRADA SURABAYA",
+    "latitude": -7.298082585,
+    "longitude": 112.7225824,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Kodim 0830 Surabaya Utara",
+    "latitude": -7.232505422,
+    "longitude": 112.7255404,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Pomdam 5 Brawijaya",
+    "latitude": -7.298997789,
+    "longitude": 112.7291733,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Korp Marinir",
+    "latitude": -7.28793008,
+    "longitude": 112.7342373,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Satlinlamil Surabaya",
+    "latitude": -7.2046132,
+    "longitude": 112.7348653,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Kolinlamil",
+    "latitude": -7.212618517,
+    "longitude": 112.7304531,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Batalyon Polisi Militer 2",
+    "latitude": -7.342850507,
+    "longitude": 112.69494,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Satlinlamil 2 Surabaya",
+    "latitude": -7.218729856,
+    "longitude": 112.7426004,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Kodam 5 Brawijaya",
+    "latitude": -7.298920836,
+    "longitude": 112.7228348,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Korem 084/Bhaskara Jaya",
+    "latitude": -7.34522997,
+    "longitude": 112.7309905,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Batalyon Infanteri (Yonif) 516",
+    "latitude": -7.297545878,
+    "longitude": 112.7273691,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Representative Military Command VI / Mulawarman",
+    "latitude": -7.236652966,
+    "longitude": 112.7343753,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Spesial police regional surabaya",
+    "latitude": -7.351811753,
+    "longitude": 112.7124343,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Perumahan Militer",
+    "latitude": -7.294901275,
+    "longitude": 112.7286191,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Koramil 0831/02 Tambaksari",
+    "latitude": -7.256917171,
+    "longitude": 112.7566369,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "PERWAKILAN KODAM VI MULAWARMAN",
+    "latitude": -7.264250066,
+    "longitude": 112.8015317,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Brimob Surabaya",
+    "latitude": -7.295002959,
+    "longitude": 112.7694027,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Kompi 1A Nginden",
+    "latitude": -7.301617913,
+    "longitude": 112.7720238,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Polisi Militer Lantamal V",
+    "latitude": -7.220490044,
+    "longitude": 112.7426925,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Batalyon Ranratfib 2 Mar",
+    "latitude": -7.206483576,
+    "longitude": 112.7472428,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Expom kodim 0831 Mulyorejo",
+    "latitude": -7.261421373,
+    "longitude": 112.7824925,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Bhumi Marinir Gunungsari",
+    "latitude": -7.306478157,
+    "longitude": 112.7159076,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "nama": "Fasilitas AKR Surabaya  - PT. AKR Corporindo, Tbk",
+    "latitude": -7.205447741,
+    "longitude": 112.722969,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "Integrated Terminal Surabaya",
+    "latitude": -7.212440053,
+    "longitude": 112.7331484,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "Terminal BBM Bandaran",
+    "latitude": -7.213046757,
+    "longitude": 112.7421338,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "PT. PLN (Persero) GITET Krian",
+    "latitude": -7.345884881,
+    "longitude": 112.6043973,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "DPPU Juanda Pertamina Aviation",
+    "latitude": -7.373778019,
+    "longitude": 112.780396,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "GIS 150kV UJUNG",
+    "latitude": -7.209788584,
+    "longitude": 112.7448263,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "PLN Gardu Induk Kenjeran",
+    "latitude": -7.253398757,
+    "longitude": 112.7743189,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "Terminal Purabaya",
+    "latitude": -7.350002091,
+    "longitude": 112.7243558,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "PT. ISM, Tbk. Bogasari Flour Mills Surabaya",
+    "latitude": -7.185385002,
+    "longitude": 112.7287128,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "Sinar Mas Agro Resources Technology Tbk. PT",
+    "latitude": -7.326447588,
+    "longitude": 112.7598887,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "PT Dok Dan Perkapalan Surabaya (Persero)",
+    "latitude": -7.200925616,
+    "longitude": 112.7340596,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "PT PAL Indonesia (Persero)",
+    "latitude": -7.205225858,
+    "longitude": 112.7428197,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "Stasiun Surabaya Pasarturi",
+    "latitude": -7.246996952,
+    "longitude": 112.7406081,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "Stasiun Surabaya Gubeng",
+    "latitude": -7.26516706,
+    "longitude": 112.7534204,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "PT. Pelabuhan Indonesia (Persero) Regional 3",
+    "latitude": -7.198558535,
+    "longitude": 112.7344938,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "Terminal Bus Osowilangun",
+    "latitude": -7.217906561,
+    "longitude": 112.6535578,
+    "type": "obvitnas",
+    "radius": 500
+  },
+  {
+    "nama": "Bandara Juanda",
+    "latitude": -7.374282843,
+    "longitude": 112.7950185,
+    "type": "kkop",
+    "radius": 15000
+  }
+]
