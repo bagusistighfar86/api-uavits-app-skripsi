@@ -23,7 +23,7 @@ const addDangerAreaController = async (req, res) => {
                 },
             }
             newDangerAreas.push(newArea)
-        });
+        })
 
         await DangerAreaModel.create(newDangerAreas)
 
