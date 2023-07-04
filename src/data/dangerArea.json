@@ -320,5 +320,55 @@
     "longitude": 112.7950185,
     "type": "kkop",
     "radius": 15000
-  }
+  },
+  {
+    "name": "Bhumi Marinir Karang Pilang",
+    "latitude": -7.336618254602779, 
+    "longitude": 112.68845437301214,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "name": "Batalyon Zeni 2 Marinir ",
+    "latitude": -7.333552970602546, 
+    "longitude": 112.68672668465854,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "name": "Rumah Dinas Marinir",
+    "latitude": -7.3364011414620345, 
+    "longitude": 112.68703981164637,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "name": "Staff Logistik Menart 2 Marinir",
+    "latitude": -7.337147644454644, 
+    "longitude": 112.69371991130964,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "name": "Mess Perwira Marinir Karangpilang",
+    "latitude": -7.338749938230735, 
+    "longitude": 112.69276701471192,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "name": "",
+    "latitude": , 
+    "longitude": ,
+    "type": "military",
+    "radius": 500
+  },
+  {
+    "name": "",
+    "latitude": , 
+    "longitude": ,
+    "type": "military",
+    "radius": 500
+  },
+
 ]
