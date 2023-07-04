@@ -1,4 +1,4 @@
-[
+const dangerArea = [
   {
     "name": "Pangkalan Marinir Surabaya",
     "latitude": -7.283912856,
@@ -357,3 +357,5 @@
     "radius": 500
   }
 ]
+
+export default dangerArea
