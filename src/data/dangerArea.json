@@ -355,20 +355,5 @@
     "longitude": 112.69276701471192,
     "type": "military",
     "radius": 500
-  },
-  {
-    "name": "",
-    "latitude": , 
-    "longitude": ,
-    "type": "military",
-    "radius": 500
-  },
-  {
-    "name": "",
-    "latitude": , 
-    "longitude": ,
-    "type": "military",
-    "radius": 500
-  },
-
+  }
 ]
