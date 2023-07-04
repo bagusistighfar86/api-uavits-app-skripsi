@@ -1,3 +1,4 @@
+import { readFileSync } from "fs"
 import { DangerAreaModel } from "../../models/DangerArea.js"
 
 const addDangerAreaController = async (req, res) => {
@@ -7,8 +8,7 @@ const addDangerAreaController = async (req, res) => {
         data: {},
     }
     try {
-        const dangerArea = require("../../data/dangerArea.json")
-        const areas = dangerArea
+        const areas = readFileSync("../../data/dangerArea.json")
         let newDangerAreas = []
 
         areas.forEach(item => {
