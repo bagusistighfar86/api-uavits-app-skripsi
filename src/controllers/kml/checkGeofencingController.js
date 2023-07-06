@@ -69,7 +69,7 @@ const checkGeofencingController = async (req, res) => {
       response.data.area_name = name
     } else if (isInside && distToArea < warningRad) {
       response.data.status = "warning"
-      response.data.message = (distToArea * meterToNauticleMiles).toFixed(4) + " meter until exiting the flight zone"
+      response.data.message = (distToArea * meterToNauticleMiles).toFixed(4) + " nmi until exiting the flight zone"
       response.data.area_name = name
     } else {
       response.data.status = "danger"
@@ -83,11 +83,15 @@ const checkGeofencingController = async (req, res) => {
     if (flight.liveFlight.length !== 0) {
       firstAltitude = flight.liveFlight[0].altitude
 
-      if ((altitude - firstAltitude) * meterToFeet > 120.0) {
+      const newAltitude = (altitude - firstAltitude) * meterToFeet
+
+      if (newAltitude > 120.0) {
         response.data.status = "safe"
         response.data.message = "The flight exceeds the maximum altitude limit"
         response.data.area_name = name
       }
+
+      if (newAltitude < 0) newAltitude = 0
 
       await FlightModel.findByIdAndUpdate(
         flightId,
@@ -96,7 +100,7 @@ const checkGeofencingController = async (req, res) => {
             liveFlight: {
               longitude,
               latitude,
-              altitude: (altitude - firstAltitude) * meterToFeet,
+              altitude: newAltitude,
               groundSpeed: groundSpeed * meterPerSecondToKnots,
               checkResponse: response,
               createdAt: new Date()
