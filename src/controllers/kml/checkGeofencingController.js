@@ -3,8 +3,9 @@ import { KMLModel } from "../../models/KML.js"
 import { FlightModel } from "../../models/Flights.js"
 
 const checkGeofencingController = async (req, res) => {
-  const meterToFeet = 3.2808399 
-  const meterPerSecondToKnots = 1.9438444924423 
+  const meterToFeet = 3.2808399
+  const meterPerSecondToKnots = 1.9438444924423
+  const meterToNauticleMiles = 0.0005399568
 
   let statusPenerbangan = ""
   let msgPenerbangan = ""
@@ -68,15 +69,13 @@ const checkGeofencingController = async (req, res) => {
       response.data.area_name = name
     } else if (isInside && distToArea < warningRad) {
       response.data.status = "warning"
-      response.data.message = distToArea.toFixed(0) + " meter until exiting the flight zone"
+      response.data.message = (distToArea * meterToNauticleMiles).toFixed(4) + " meter until exiting the flight zone"
       response.data.area_name = name
     } else {
       response.data.status = "danger"
       response.data.message = "Out from the flight zone"
       response.data.area_name = name
     }
-
-    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate")
 
     const flight = await FlightModel.findById(flightId)
     let firstAltitude
@@ -92,27 +91,38 @@ const checkGeofencingController = async (req, res) => {
 
       await FlightModel.findByIdAndUpdate(
         flightId,
-        { $push: { liveFlight: { 
-          longitude, 
-          latitude, 
-          altitude: (altitude - firstAltitude) * meterToFeet, 
-          groundSpeed: groundSpeed * meterPerSecondToKnots, 
-          checkResponse: response,
-          createdAt: new Date() } } },
+        {
+          $push: {
+            liveFlight: {
+              longitude,
+              latitude,
+              altitude: (altitude - firstAltitude) * meterToFeet,
+              groundSpeed: groundSpeed * meterPerSecondToKnots,
+              checkResponse: response,
+              createdAt: new Date()
+            }
+          }
+        },
       )
     } else {
       await FlightModel.findByIdAndUpdate(
         flightId,
-        { $push: { liveFlight: { 
-          longitude, 
-          latitude, 
-          altitude: altitude, 
-          groundSpeed: groundSpeed * meterPerSecondToKnots, 
-          checkResponse: response,
-          createdAt: new Date() } } },
+        {
+          $push: {
+            liveFlight: {
+              longitude,
+              latitude,
+              altitude: altitude,
+              groundSpeed: groundSpeed * meterPerSecondToKnots,
+              checkResponse: response,
+              createdAt: new Date()
+            }
+          }
+        },
       )
     }
 
+    console.log(response)
     return res.status(200).json(response)
   } catch (e) {
     response.code = 500
