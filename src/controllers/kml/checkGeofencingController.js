@@ -85,7 +85,7 @@ const checkGeofencingController = async (req, res) => {
 
       const newAltitude = (altitude - firstAltitude) * meterToFeet
 
-      if (newAltitude > 120.0) {
+      if (newAltitude > (120.0 * meterToFeet)) {
         response.data.status = "safe"
         response.data.message = "The flight exceeds the maximum altitude limit"
         response.data.area_name = name
