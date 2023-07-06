@@ -218,7 +218,7 @@ const FlightSchema = new mongoose.Schema({
     isNeedSubmit: {
         type: Boolean,
         required: true,
-        default: true
+        default: false
     },
     isNeedVerified: {
         type: Boolean,
