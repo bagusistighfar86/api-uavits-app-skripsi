@@ -13,8 +13,6 @@ const updatePostFlightReportController = async (req, res) => {
         const { id } = req.params
 
         const pfrDetail = JSON.parse(req.body.pfrDetail)
-        const flightDetail = JSON.parse(req.body.flightDetail)
-        const userDetail = JSON.parse(req.body.userDetail)
 
         const lastPFR = await PostFlightReportModel.findById({
             _id: id,
@@ -34,8 +32,6 @@ const updatePostFlightReportController = async (req, res) => {
 
         const updatedData = {
             pfrDetail,
-            flightDetail,
-            userDetail,
             document: newDocument,
             isNeedSubmit: true,
             updatedAt: new Date()
