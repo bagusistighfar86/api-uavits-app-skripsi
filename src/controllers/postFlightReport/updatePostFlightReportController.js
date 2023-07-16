@@ -63,8 +63,8 @@ const updatePostFlightReportController = async (req, res) => {
         const __filename = fileURLToPath(import.meta.url)
         const __dirname = dirname(__filename)
         const assetsDirectory = join(__dirname, '../../../')
-        if (notam !== lastDrone.document.notam)
-            fs.unlinkSync(join(assetsDirectory, lastDrone.document.notam))
+        if (notam !== lastPFR.document.notam)
+            fs.unlinkSync(join(assetsDirectory, lastPFR.document.notam))
 
             response.code = 200
         response.message = "Post flight report  data successfully update"
