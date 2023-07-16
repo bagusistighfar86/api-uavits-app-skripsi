@@ -21,9 +21,14 @@ const DangerAreaSchema = new mongoose.Schema({
         required: true
     },
     coordinates: {
-        latitude: Number,
-        longitude: Number,
-        required: true
+        latitude: {
+            type: Number,
+            required: true,
+        },
+        longitude: {
+            type: Number,
+            required: true,
+        },
     },
     created: {
         type: Date,
