@@ -7,17 +7,14 @@ const checkGeofencingController = async (req, res) => {
   const meterPerSecondToKnots = 1.9438444924423
   const meterToNauticleMiles = 0.0005399568
 
-  let statusPenerbangan = ""
-  let msgPenerbangan = ""
-
   let code = 200
   let name = ""
   let response = {
     code: code,
     message: "Data successfully retrieved",
     data: {
-      status: statusPenerbangan,
-      message: msgPenerbangan,
+      status: "",
+      message: "",
       area_name: name
     },
   }
@@ -126,7 +123,6 @@ const checkGeofencingController = async (req, res) => {
       )
     }
 
-    console.log(response)
     return res.status(200).json(response)
   } catch (e) {
     response.code = 500

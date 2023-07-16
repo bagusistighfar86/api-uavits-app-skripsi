@@ -3,7 +3,6 @@ import { CounterModel } from "./Counter.js"
 
 const CompleteFlightStatus = Object.freeze({
     NONE: "none",
-    ACTIVE: "active",
     FAILED: "failed",
     SUCCESS: "success"
 })

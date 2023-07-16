@@ -9,7 +9,6 @@ const StatusVerification = Object.freeze({
 
 const CompleteFlightStatus = Object.freeze({
     NONE: "none",
-    ACTIVE: "active",
     FAILED: "failed",
     SUCCESS: "success"
 })
@@ -68,7 +67,6 @@ const LiveCoordinatesSchema = new mongoose.Schema({
 const KMLSchema = new mongoose.Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
-        default: new mongoose.Types.ObjectId()
     },
     name: {
         type: String,

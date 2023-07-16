@@ -24,6 +24,7 @@ const addFlightController = async (req, res, next) => {
         if (req.files['authorityPermit']) authorityPermit = req.files['authorityPermit'][0]
         
         const newKML = {
+            _id: new mongoose.Types.ObjectId(),
             name: "",
             coordinates: [],
             kmlFile: kml.path.replace(/\\/g, '/')

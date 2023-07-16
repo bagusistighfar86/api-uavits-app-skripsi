@@ -24,7 +24,7 @@ const getDetailPostFlightReportController = async (req, res) => {
 
         response.code = 200
         response.message = "Get post flight report successfull"
-        response.data = { drone }
+        response.data = { pfr }
         return res.status(200).json(response)
     } catch (e) {
         response.code = 500

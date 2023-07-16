@@ -9,7 +9,7 @@ const AreaType = Object.freeze({
 const DangerAreaSchema = new mongoose.Schema({
     name: {
         type: String,
-        default: ""
+        required: true
     },
     type: {
         type: String,
@@ -18,10 +18,12 @@ const DangerAreaSchema = new mongoose.Schema({
     },
     radius: {
         type: Number,
+        required: true
     },
     coordinates: {
         latitude: Number,
-        longitude: Number
+        longitude: Number,
+        required: true
     },
     created: {
         type: Date,

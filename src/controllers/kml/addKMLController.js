@@ -36,6 +36,7 @@ const addKMLController = async (req, res) => {
         }
 
         const newKML = new KMLModel({
+            _id: savedFlight.document.kml._id,
             key: key,
             flightId: flightId,
             radius: 100,
