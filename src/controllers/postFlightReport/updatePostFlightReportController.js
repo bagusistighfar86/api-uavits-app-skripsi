@@ -24,7 +24,7 @@ const updatePostFlightReportController = async (req, res) => {
             }
         })
 
-        let notam = lastDrone.document.notam
+        let notam = lastPFR.document.notam
         if (req.files['notam']) notam = req.files['notam'][0]
 
 
