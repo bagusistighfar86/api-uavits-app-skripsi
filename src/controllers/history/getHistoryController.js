@@ -1,6 +1,11 @@
 import { HistoryModel } from "../../models/Histories.js"
 
 const getHistoryController = async (req, res) => {
+    let response = {
+        code: 200,
+        message: "",
+        data: {},
+    }
     try {
         const histories = await HistoryModel.find({
             auth: {
@@ -9,9 +14,15 @@ const getHistoryController = async (req, res) => {
             }
         })
 
-        return res.status(200).json(histories)
-    } catch (error) {
-        res.status(500).json({ error: "Internal server error", detail: error.message })
+        response.code = 200
+        response.message = e.message
+        response.data = {histories}
+        return res.status(200).json(response)
+    } catch (e) {
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 
