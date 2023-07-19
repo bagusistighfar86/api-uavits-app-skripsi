@@ -8,7 +8,7 @@ const getOneKMLController = async (req, res) => {
     }
     try {
         const { flightId } = req.body
-        const kml = await KMLModel.find({
+        const kml = await KMLModel.findOne({
             flightId: flightId
         })
 
