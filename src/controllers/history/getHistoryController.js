@@ -15,7 +15,7 @@ const getHistoryController = async (req, res) => {
         })
 
         response.code = 200
-        response.message = e.message
+        response.message = "Get Data History Success"
         response.data = {histories}
         return res.status(200).json(response)
     } catch (e) {
