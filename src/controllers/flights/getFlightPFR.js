@@ -1,6 +1,11 @@
 import { FlightModel } from "../../models/Flights.js"
 
 const getFlightPFRController = async (req, res) => {
+    let response = {
+        code: 200,
+        message: "",
+        data: {},
+    }
     try {
         const flights = await FlightModel.find({
             'detailChecklist.isCompleteChecklist': true,
@@ -10,9 +15,15 @@ const getFlightPFRController = async (req, res) => {
             }
         })
 
-        return res.status(200).json(flights)
+        response.code = 200
+        response.message = "Get flights for Post flight report success"
+        response.data = { flights }
+        return res.status(200).json(response)
     } catch (error) {
-        res.status(500).json({ error: "Internal server error", detail: error.message })
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 

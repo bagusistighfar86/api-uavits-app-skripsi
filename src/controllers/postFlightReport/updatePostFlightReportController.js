@@ -62,7 +62,7 @@ const updatePostFlightReportController = async (req, res) => {
         if (notam !== lastPFR.document.notam)
             fs.unlinkSync(join(assetsDirectory, lastPFR.document.notam))
 
-            response.code = 200
+        response.code = 200
         response.message = "Post flight report  data successfully update"
         response.data = { pfr: newPFR }
         return res.status(200).json(response)
