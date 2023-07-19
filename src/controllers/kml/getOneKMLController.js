@@ -7,7 +7,7 @@ const getOneKMLController = async (req, res) => {
         data: {},
     }
     try {
-        const { flightId } = req.body()
+        const { flightId } = req.body
         const kml = await KMLModel.find({
             flightId: flightId
         })
