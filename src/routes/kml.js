@@ -34,7 +34,7 @@ const cpUpload = upload.fields([
     { name: 'kml', maxCount: 1 }
 ])
 
-router.get("/:id", cpUpload, verifyToken, getOneKMLController)
+router.get("/:flightId", cpUpload, verifyToken, getOneKMLController)
 router.get("/", cpUpload, verifyToken, getKMLController)
 router.post("/", cpUpload, addKMLController)
 router.post("/check-geofencing", verifyToken, checkGeofencingController,)
