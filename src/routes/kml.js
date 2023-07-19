@@ -1,11 +1,11 @@
 import multer from "multer"
 import { v4 as uuidv4 } from "uuid"
 import express from "express"
-// import { verifyTokenAdmin } from "../middleware/verifyTokenAdmin.js"
 import addKMLController from "../controllers/kml/addKMLController.js"
 import checkGeofencingController from "../controllers/kml/checkGeofencingController.js"
 import { verifyToken } from "../middleware/verifyToken.js"
 import getKMLController from "../controllers/kml/getKMLController.js"
+import getOneKMLController from "../controllers/kml/getOneKMLController.js"
 
 const router = express.Router()
 const storage = multer.diskStorage({
@@ -34,6 +34,7 @@ const cpUpload = upload.fields([
     { name: 'kml', maxCount: 1 }
 ])
 
+router.get("/:id", cpUpload, verifyToken, getOneKMLController)
 router.get("/", cpUpload, verifyToken, getKMLController)
 router.post("/", cpUpload, addKMLController)
 router.post("/check-geofencing", verifyToken, checkGeofencingController,)
