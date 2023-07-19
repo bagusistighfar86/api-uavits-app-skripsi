@@ -28,6 +28,34 @@ const HistoryCoordinatesSchema = new mongoose.Schema({
         required: true,
         default: 0.0
     },
+    checkResponse: {
+        code: {
+            type: Number,
+            default: 200
+        },
+        message: {
+            type: String,
+            default: "-"
+        },
+        data: {
+            status: {
+                type: String,
+                default: "-"
+            },
+            message:{
+                type: String,
+                default: "-"
+            },
+            area_name:{
+                type: String,
+                default: "-"
+            }
+        },
+    },
+    createdAt: {
+        type: Date,
+        required: false
+    },
 })
 
 const HistoryPilotSchema = new mongoose.Schema({
