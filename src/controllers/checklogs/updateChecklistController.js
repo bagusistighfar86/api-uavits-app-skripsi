@@ -3,6 +3,11 @@ import { FlightModel } from "../../models/Flights.js"
 
 
 const updateChecklistController = async (req, res) => {
+    let response = {
+        code: 200,
+        message: "",
+        data: {},
+    }
     try {
         const { id } = req.params
         const { stepId, flightId } = req.query
@@ -18,7 +23,10 @@ const updateChecklistController = async (req, res) => {
         })
 
         if (!checklist) {
-            return res.status(404).json({ error: "Checklist not found" })
+            response.code = 404
+            response.message = "Checklist data not found"
+            response.data = {}
+            return res.status(404).json(response)
         }
 
         const detailIndex = checklist.detailChecklist.findIndex(
@@ -26,7 +34,10 @@ const updateChecklistController = async (req, res) => {
         )
 
         if (detailIndex === -1) {
-            return res.status(404).json({ error: "Detail checklist not found" })
+            response.code = 404
+            response.message = "Checklist data not found"
+            response.data = {}
+            return res.status(404).json(response)
         }
 
         if (timeStep) {
@@ -68,9 +79,15 @@ const updateChecklistController = async (req, res) => {
             }
         }
 
-        res.status(200).json({ message: "Checklist updated successfully" })
+        response.code = 200
+        response.message = "Checklist updated successfully"
+        response.data = {}
+        return res.status(200).json(response)
     } catch (e) {
-        res.status(500).json({ error: "Internal server error", detail: e.message })
+        response.code = 500
+        response.message = e.message
+        response.data = {}
+        return res.status(500).json(response)
     }
 }
 
