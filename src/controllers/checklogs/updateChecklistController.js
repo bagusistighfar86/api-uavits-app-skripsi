@@ -42,6 +42,8 @@ const updateChecklistController = async (req, res) => {
 
         if (timeStep) {
             checklist.detailChecklist[detailIndex].timeStep = timeStep
+        } else {
+            checklist.detailChecklist[detailIndex].timeStep = null
         }
         if (isCheck !== undefined) {
             checklist.detailChecklist[detailIndex].isCheck = isCheck
