@@ -85,7 +85,7 @@ const updateChecklistController = async (req, res) => {
 
             if (isCompleteChecklist) {
                 await FlightModel.findByIdAndUpdate(
-                    allChecklist.flightId, 
+                    checklist.flightId,  
                     { $set: { 
                         'detailChecklist.isCompleteChecklist': true } 
                     },
