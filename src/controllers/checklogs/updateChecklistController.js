@@ -10,7 +10,7 @@ const updateChecklistController = async (req, res) => {
     }
     try {
         const { id } = req.params
-        const { stepId, flightId } = req.query
+        const { stepId } = req.query
 
         const { timeStep, isCheck } = req.body
 
@@ -60,8 +60,8 @@ const updateChecklistController = async (req, res) => {
         const doneUpdate = await checklist.save()
 
         if (allChecksAreTrue && doneUpdate) {
-            const allChecklist = await ChecklistModel.find({
-                flightId: flightId,
+            const allChecklist = await ChecklistModel.findOne({
+                _id: id,
                 auth: {
                     userId: req.userId,
                     role: req.role
@@ -74,7 +74,7 @@ const updateChecklistController = async (req, res) => {
 
             if (isCompleteChecklist) {
                 await FlightModel.findByIdAndUpdate(
-                    flightId, { $set: { 'detailChecklist.isCompleteChecklist': true } },
+                    allChecklist.flightId, { $set: { 'detailChecklist.isCompleteChecklist': true } },
                 )
             }
         }
