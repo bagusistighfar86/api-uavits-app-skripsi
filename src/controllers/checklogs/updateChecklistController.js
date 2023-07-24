@@ -64,6 +64,17 @@ const updateChecklistController = async (req, res) => {
                     checklist.flightId, { $set: { arrival:  checklist.detailChecklist[0].timeStep} },
                 )
             }
+        } else {
+            checklist.isComplete = false
+            if (checklist.type == "preparation") {
+                await FlightModel.findByIdAndUpdate(
+                    checklist.flightId, { $set: { departure:  null} },
+                )
+            } else {
+                await FlightModel.findByIdAndUpdate(
+                    checklist.flightId, { $set: { arrival:  null} },
+                )
+            }
         }
 
         checklist.updatedAt = new Date()
@@ -91,6 +102,13 @@ const updateChecklistController = async (req, res) => {
                     },
                 )
             }
+        } else {
+            await FlightModel.findByIdAndUpdate(
+                checklist.flightId,  
+                { $set: { 
+                    'detailChecklist.isCompleteChecklist': false } 
+                },
+            )
         }
 
         response.code = 200
