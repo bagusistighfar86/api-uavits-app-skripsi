@@ -72,7 +72,7 @@ const updateChecklistController = async (req, res) => {
 
         if (allChecksAreTrue && doneUpdate) {
             const allChecklist = await ChecklistModel.find({
-                _id: id,
+                flightId: checklist.flightId,
                 auth: {
                     userId: req.userId,
                     role: req.role
